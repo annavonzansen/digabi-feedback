@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SCRIPTS="$(ls scripts/*.sh)"
+SCRIPTS="$(ls collect-hooks/*.sh)"
 LOGFILE="mylog.log"
 
 for s in ${SCRIPTS}
