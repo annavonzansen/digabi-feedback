@@ -1,0 +1,22 @@
+# Source: <source package name; defaults to package name>
+Section: misc
+Priority: optional
+Homepage: http://digabi.fi/
+Standards-Version: 3.9.2
+
+Package: digabi-feedback
+Maintainer: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
+Depends: digabi-common
+Changelog: debian/changelog
+Files: submit-feedback /usr/lib/digabi/scripts
+ collect-feedback /usr/lib/digabi/scripts
+ digabi-feedback /etc/init.d
+Description: Collects device information and submits it to Digabi project, if user allows.
+File: postinst
+ #!/bin/sh -e
+ set -e
+ update-rc.d digabi-feedback defaults
+File: prerm
+ #!/bin/sh -e
+ set -e
+ update-rc.d digabi-feedback remove

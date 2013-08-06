@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SCRIPTS="$(ls collect-hooks/*.sh)"
+SCRIPTS="$(ls /usr/lib/digabi/collect-hooks/*.sh)"
 LOGFILE="/var/log/digabi-feedback.log"
 
 if [ ! -w "${LOGFILE}" ]
