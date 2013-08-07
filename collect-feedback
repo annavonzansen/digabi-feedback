@@ -11,7 +11,7 @@
 HOOKS_DIR="/usr/lib/digabi/collect-hooks"
 LOGFILE="/var/log/digabi-feedback.log"
 
-if [ ! -w "${LOGFILE}" ]
+if [ ! -w "$(dirname ${LOGFILE})" ]
 then
     LOGFILE="${HOME}/digabi-feedback.log"
 fi
