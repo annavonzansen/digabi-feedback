@@ -1,8 +1,14 @@
-digabi-feedback (1.1.1) UNRELEASED; urgency=low
+digabi-feedback (1.1.2) unstable; urgency=low
+
+  * Added missing hooks.
+
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 04:10:51 +0300
+
+digabi-feedback (1.1.1) unstable; urgency=low
 
   * Added script for running dmidecode, collect system information.
 
- -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 03:21:00 +0300
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 04:10:36 +0300
 
 digabi-feedback (1.1.0) unstable; urgency=low
 

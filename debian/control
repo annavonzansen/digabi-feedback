@@ -10,6 +10,20 @@ Changelog: debian/changelog
 Files: submit-feedback /usr/lib/digabi/scripts
  collect-feedback /usr/lib/digabi/scripts
  digabi-feedback /etc/init.d
+ collect-hooks/000-id.sh /usr/lib/digabi
+ collect-hooks/010-cpuinfo.sh /usr/lib/digabi
+ collect-hooks/011-cmdline.sh /usr/lib/digabi
+ collect-hooks/011-meminfo.sh /usr/lib/digabi
+ collect-hooks/012-devices.sh /usr/lib/digabi
+ collect-hooks/013-uptime.sh /usr/lib/digabi
+ collect-hooks/014-virt-what.sh /usr/lib/digabi
+ collect-hooks/015-imvirt.sh /usr/lib/digabi
+ collect-hooks/016-lshw.sh /usr/lib/digabi
+ collect-hooks/017-lspci.sh /usr/lib/digabi
+ collect-hooks/018-lsusb.sh /usr/lib/digabi
+ collect-hooks/019-lsmod.sh /usr/lib/digabi
+ collect-hooks/020-dmesg.sh /usr/lib/digabi
+ collect-hooks/021-dmidecode.sh /usr/lib/digabi
 Description: Collects device information and submits it to Digabi project, if user allows.
 File: postinst
  #!/bin/sh -e
