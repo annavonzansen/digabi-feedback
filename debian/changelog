@@ -1,8 +1,14 @@
-digabi-feedback (1.1.4) UNRELEASED; urgency=low
+digabi-feedback (1.1.5) unstable; urgency=low
+
+  * Redirected stderr to stdout (2>&1).
+
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 05:14:42 +0300
+
+digabi-feedback (1.1.4) unstable; urgency=low
 
   * Fixed syntax, didn't loop through files.
 
- -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 05:08:20 +0300
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 05:14:22 +0300
 
 digabi-feedback (1.1.3) unstable; urgency=low
 
