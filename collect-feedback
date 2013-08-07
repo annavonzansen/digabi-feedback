@@ -18,7 +18,7 @@ fi
 
 if [ -f "${LOGFILE}" ]
 then
-    echo "I: Logfile already exists, will not rewrite => exiting."
+    echo "I: Logfile already exists, will not rewrite => exiting." 1>&2
     exit 1
 fi
 
@@ -31,4 +31,5 @@ do
         echo "# END:   --$(basename ${s})-- #" >>${LOGFILE}
     fi
 done
-echo "I: Log saved to ${LOGFILE}."
+echo "I: Log saved to ${LOGFILE}." 1>&2
+
