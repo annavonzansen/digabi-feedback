@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SCRIPTS="$(ls /usr/lib/digabi/collect-hooks/*.sh)"
+HOOKS_DIR="/usr/lib/digabi/collect-hooks"
 LOGFILE="/var/log/digabi-feedback.log"
 
 if [ ! -w "${LOGFILE}" ]
@@ -14,7 +14,7 @@ then
     exit 1
 fi
 
-for s in ${SCRIPTS}
+for s in "${HOOKS_DIR}/*.sh"
 do
     if [ -x "${s}" ]
     then
