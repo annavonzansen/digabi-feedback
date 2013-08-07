@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COMMAND="lshw"
+COMMAND="/usr/bin/lshw"
 
 if [ -x "${COMMAND}" ]
 then

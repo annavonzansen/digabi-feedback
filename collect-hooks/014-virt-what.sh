@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COMMAND="virt-what"
+COMMAND="/usr/sbin/virt-what"
 
 if [ -x "${COMMAND}" ]
 then

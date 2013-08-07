@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COMMAND="imvirt"
+COMMAND="/usr/bin/imvirt"
 
 if [ -x "${COMMAND}" ]
 then
