@@ -1,3 +1,9 @@
+digabi-feedback (1.1.6) unstable; urgency=low
+
+  * Fixed invalid logmessages.
+
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 05:17:53 +0300
+
 digabi-feedback (1.1.5) unstable; urgency=low
 
   * Redirected stderr to stdout (2>&1).
