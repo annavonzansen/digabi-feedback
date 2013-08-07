@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COMMAND="/bin/dmidecode"
+COMMAND="/usr/sbin/dmidecode"
 
 if [ -x "${COMMAND}" ]
 then
