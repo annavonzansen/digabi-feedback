@@ -1,9 +1,9 @@
-digabi-feedback (1.1.10) UNRELEASED; urgency=low
+digabi-feedback (1.1.10) unstable; urgency=low
 
   * Added zenity, to display boxes.
   * Added desktop icon for submitting.
 
- -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 11:40:38 +0300
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Wed, 07 Aug 2013 13:25:10 +0300
 
 digabi-feedback (1.1.9) unstable; urgency=low
 
