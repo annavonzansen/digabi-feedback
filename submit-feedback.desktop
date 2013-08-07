@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Send device information to Digabi
+Name[fi]=Lähetä laitetietoja Digabille
+Name[sv]=Skicka information om enheten till Digabi
+Comment=Submits device data to Digabi, see digabi.fi
+Exec=/usr/bin/sudo /usr/bin/digabi submit-feedback
+Icon=
+Path=
+Terminal=false
+StartupNotify=false
