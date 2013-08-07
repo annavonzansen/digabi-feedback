@@ -11,35 +11,22 @@
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 DESC="digabi device information collector"
 NAME=digabi-feedback
-DAEMON=/usr/bin/digabi
+DAEMON="/usr/bin/digabi collect-feedback"
 PIDFILE=/var/run/digabi-feedback.pid
 SCRIPTNAME=/etc/init.d/"$NAME"
 
-test -f $DAEMON || exit 0
+# FIXME !!!!!!
 
 . /lib/lsb/init-functions
 case "$1" in
 start)	log_daemon_msg "Starting digabi-feedback" "digabi-feedback"
-        start_daemon -p $PIDFILE $DAEMON $EXTRA_OPTS
+	${DAEMON}
         log_end_msg $?
 	;;
 stop)	log_daemon_msg "Stopping digabi-feedback" "digabi-feedback"
-        killproc -p $PIDFILE $DAEMON
-        RETVAL=$?
-        [ $RETVAL -eq 0 ] && [ -e "$PIDFILE" ] && rm -f $PIDFILE
+	RETVAL="0"
         log_end_msg $RETVAL
         ;;
-#restart) log_daemon_msg "Restarting digabi-feedback" "digabi-feedback" 
-#        $0 stop
-#        $0 start
-#        ;;
-#reload|force-reload) log_daemon_msg "Reloading configuration files for digabi-feedback" "digabi-feedback"
-#	# digabi-feedback reloads automatically
-#        log_end_msg 0
-#        ;;
-#status)
-#        status_of_proc -p $PIDFILE $DAEMON $NAME && exit 0 || exit $?
-#        ;;
 *)	log_action_msg "Usage: /etc/init.d/digabi-feedback {start|stop}"
         exit 2
         ;;
