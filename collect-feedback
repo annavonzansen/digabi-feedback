@@ -1,5 +1,13 @@
 #!/bin/sh
 
+#
+# Collect system information using hooks, save to file.
+#
+# (c) 2013 The Matriculation Examination Board of Finland
+# http://digabi.fi/
+# Author: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
+# GPLv3
+
 HOOKS_DIR="/usr/lib/digabi/collect-hooks"
 LOGFILE="/var/log/digabi-feedback.log"
 

@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#
+# Submit collected system information to Digabi server
+#
+# (c) 2013 The Matriculation Examination Board of Finland
+# http://digabi.fi/
+# Author: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
+# GPLv3
+#
+
 LOGFILES="/var/log/digabi-feedback.log ${HOME}/digabi-feedback.log"
 SUBMIT_URL="https://digabi.fi/s/feedback.php"
 
