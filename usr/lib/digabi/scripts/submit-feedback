@@ -77,13 +77,10 @@ with_backoff () {
   return $exitCode
 }
 
-for l in ${LOGFILES}
-do
-   if [ -r "${l}" ]
+if [ -r "${LOGFILE}" ]
    then
-       with_backoff curl -F"dup=true" -F"version=1.0" -F"data=@${l}" "${SUBMIT_URL}"
-   fi
-done
+       with_backoff curl -F"dup=true" -F"version=2.0" -F"data=@${LOGFILE}" "${SUBMIT_URL}"
+fi
 
 #if [ ! -z "${LOGFILE}" ]
 #  then

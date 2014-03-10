@@ -1,3 +1,9 @@
+digabi-feedback (2.1.1) unstable; urgency=medium
+
+  * Fixed invalid submission handler.
+
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Mon, 10 Mar 2014 04:50:53 +0200
+
 digabi-feedback (2.0) unstable; urgency=medium
 
   * Application fully rewritten.
