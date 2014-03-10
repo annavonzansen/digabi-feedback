@@ -7,8 +7,8 @@ Package: digabi-feedback
 Maintainer: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
 Depends: digabi-common, zenity
 Changelog: debian/changelog
-Files: usr/lib/digabi/submit-feedback /
- usr/lib/digabi/collect-feedback /
+Files: usr/lib/digabi/scripts/submit-feedback /
+ usr/lib/digabi/scripts/collect-feedback /
  etc/sudoers.d/digabi-feedback /
  etc/skel/Desktop/submit-feedback.desktop /
  usr/lib/digabi/feedback-hooks/000-id.sh /

@@ -1,3 +1,15 @@
+digabi-feedback (2.0) unstable; urgency=medium
+
+  * Application fully rewritten.
+  * Added much better GUI.
+  * Remove serial numbers from dmidecode output.
+  * Submit full dmesg log.
+  * Removed init.d script.
+  * Added icon for desktop.
+  * Added sudoers.d config to collect data as root.
+
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Mon, 10 Mar 2014 04:42:14 +0200
+
 digabi-feedback (1.1.10) unstable; urgency=low
 
   * Added zenity, to display boxes.
