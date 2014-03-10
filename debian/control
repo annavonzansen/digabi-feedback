@@ -7,10 +7,10 @@ Package: digabi-feedback
 Maintainer: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
 Depends: digabi-common, zenity
 Changelog: debian/changelog
-Files: submit-feedback /usr/lib/digabi/scripts
- submit-feedback.desktop /etc/skel/Desktop
- collect-feedback /usr/lib/digabi/scripts
- digabi-feedback /etc/init.d
+Files: usr/lib/digabi/submit-feedback /
+ usr/lib/digabi/collect-feedback /
+ etc/sudoers.d/digabi-feedback /
+ etc/skel/Desktop/submit-feedback.desktop /
  collect-hooks/000-id.sh /usr/lib/digabi
  collect-hooks/010-cpuinfo.sh /usr/lib/digabi
  collect-hooks/011-cmdline.sh /usr/lib/digabi
@@ -26,11 +26,3 @@ Files: submit-feedback /usr/lib/digabi/scripts
  collect-hooks/020-dmesg.sh /usr/lib/digabi
  collect-hooks/021-dmidecode.sh /usr/lib/digabi
 Description: Collects device information and submits it to Digabi project, if user allows.
-File: postinst
- #!/bin/sh -e
- set -e
- update-rc.d digabi-feedback defaults
-File: prerm
- #!/bin/sh -e
- set -e
- update-rc.d digabi-feedback remove

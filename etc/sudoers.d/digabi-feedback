@@ -1,0 +1,1 @@
+digabi  ALL=(root) NOPASSWD: /usr/bin/digabi submit-feedback
