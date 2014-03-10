@@ -7,14 +7,14 @@
 # http://digabi.fi/
 # Author: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
 # GPLv3
-
 HOOKS_DIR="/usr/lib/digabi/feedback-hooks"
+
 for s in ${HOOKS_DIR}/*.sh
 do
     if [ -x "${s}" ]
     then
-        echo "# BEGIN: --$(basename ${s})-- #" >>${LOGFILE}
+        echo "# BEGIN: --$(basename ${s})-- #"
         ${s}
-        echo "# END:   --$(basename ${s})-- #" >>${LOGFILE}
+        echo "# END:   --$(basename ${s})-- #"
     fi
 done
