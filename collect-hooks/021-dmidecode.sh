@@ -5,7 +5,7 @@ COMMAND="/usr/sbin/dmidecode"
 if [ -x "${COMMAND}" ]
 then
     echo "I: Executing command (${COMMAND})."
-    ${COMMAND} -t system 2>&1
+    ${COMMAND} 2>&1 |grep -v "Serial Number"
 else
     echo "E: Can't execute command (${COMMAND})."
 fi
