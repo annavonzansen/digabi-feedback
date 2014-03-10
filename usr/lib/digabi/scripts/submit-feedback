@@ -3,14 +3,43 @@
 #
 # Submit collected system information to Digabi server
 #
-# (c) 2013 The Matriculation Examination Board of Finland
+# (c) 2013, 2014 The Matriculation Examination Board of Finland
 # http://digabi.fi/
 # Author: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
 # GPLv3
 #
-
-LOGFILES="/var/log/digabi-feedback.log ${HOME}/digabi-feedback.log"
 SUBMIT_URL="https://digabi.fi/s/feedback.php"
+HOOKS_DIR="/usr/lib/digabi/feedback-hooks"
+LOGFILE="$(mktemp digabi-feedback.XXXXXXX.log)"
+APPNAME="digabi-feedback"
+LOGFILE_URL="file://$(readlink -f ${LOGFILE})"
+
+collect_data() {
+  sudo /usr/bin/digabi collect-feedback >${LOGFILE}
+  echo "TODO"
+}
+
+ask_permission() {
+  MESSAGE="<b>Submit device information to Digabi Project?</b>\n\n\
+Do you want to submit device information to Digabi project?\n\
+Collected data will be used for creating list of supported devices and for troubleshooting purposes.\n\n\
+This data includes computer model, manufacturer, cpu type, size of the memory, list of devices etc. \
+<a href='https://digabi.fi/feedback'>See full description about data we collect</a> and <a href='${LOGFILE_URL}'>preview collected data</a>.\n\n\
+Connection is encrypted, and no personal information will be sent.\n\n\
+<a href='https://digabi.fi/privacy'>Read Digabi Privacy Policy</a>"
+  zenity --question --title="${APPNAME}" --text="${MESSAGE}"
+  echo "$?"
+}
+
+
+collect_data
+
+if [ "$(ask_permission)" = 1 ]
+then
+  zenity --warning --title="${APPNAME}" --text="Data submission cancelled per your request. Re-run this application if you want to submit."
+  exit 1
+fi
+
 
 ATTEMPTS="15"
 TIMEOUT="5"
@@ -50,8 +79,13 @@ with_backoff () {
 
 for l in ${LOGFILES}
 do
-    if [ -r "${l}" ]
-    then
-        with_backoff curl -F"dup=true" -F"version=1.0" -F"data=@${l}" "${SUBMIT_URL}"
-    fi
+   if [ -r "${l}" ]
+   then
+       with_backoff curl -F"dup=true" -F"version=1.0" -F"data=@${l}" "${SUBMIT_URL}"
+   fi
 done
+
+#if [ ! -z "${LOGFILE}" ]
+#  then
+#  rm "${LOGFILE}"
+#fi
