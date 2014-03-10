@@ -8,7 +8,7 @@
 # Author: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
 # GPLv3
 
-HOOKS_DIR="/usr/lib/digabi/collect-hooks"
+HOOKS_DIR="/usr/lib/digabi/feedback-hooks"
 LOGFILE="/var/log/digabi-feedback.log"
 
 if [ ! -w "$(dirname ${LOGFILE})" ]

@@ -11,18 +11,18 @@ Files: usr/lib/digabi/submit-feedback /
  usr/lib/digabi/collect-feedback /
  etc/sudoers.d/digabi-feedback /
  etc/skel/Desktop/submit-feedback.desktop /
- collect-hooks/000-id.sh /usr/lib/digabi
- collect-hooks/010-cpuinfo.sh /usr/lib/digabi
- collect-hooks/011-cmdline.sh /usr/lib/digabi
- collect-hooks/011-meminfo.sh /usr/lib/digabi
- collect-hooks/012-devices.sh /usr/lib/digabi
- collect-hooks/013-uptime.sh /usr/lib/digabi
- collect-hooks/014-virt-what.sh /usr/lib/digabi
- collect-hooks/015-imvirt.sh /usr/lib/digabi
- collect-hooks/016-lshw.sh /usr/lib/digabi
- collect-hooks/017-lspci.sh /usr/lib/digabi
- collect-hooks/018-lsusb.sh /usr/lib/digabi
- collect-hooks/019-lsmod.sh /usr/lib/digabi
- collect-hooks/020-dmesg.sh /usr/lib/digabi
- collect-hooks/021-dmidecode.sh /usr/lib/digabi
+ usr/lib/digabi/feedback-hooks/000-id.sh /
+ usr/lib/digabi/feedback-hooks/010-cpuinfo.sh /
+ usr/lib/digabi/feedback-hooks/011-cmdline.sh /
+ usr/lib/digabi/feedback-hooks/011-meminfo.sh /
+ usr/lib/digabi/feedback-hooks/012-devices.sh /
+ usr/lib/digabi/feedback-hooks/013-uptime.sh /
+ usr/lib/digabi/feedback-hooks/014-virt-what.sh /
+ usr/lib/digabi/feedback-hooks/015-imvirt.sh /
+ usr/lib/digabi/feedback-hooks/016-lshw.sh /
+ usr/lib/digabi/feedback-hooks/017-lspci.sh /
+ usr/lib/digabi/feedback-hooks/018-lsusb.sh /
+ usr/lib/digabi/feedback-hooks/019-lsmod.sh /
+ usr/lib/digabi/feedback-hooks/020-dmesg.sh /
+ usr/lib/digabi/feedback-hooks/021-dmidecode.sh /
 Description: Collects device information and submits it to Digabi project, if user allows.
