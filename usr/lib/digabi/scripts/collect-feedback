@@ -9,27 +9,12 @@
 # GPLv3
 
 HOOKS_DIR="/usr/lib/digabi/feedback-hooks"
-LOGFILE="/var/log/digabi-feedback.log"
-
-if [ ! -w "$(dirname ${LOGFILE})" ]
-then
-    LOGFILE="${HOME}/digabi-feedback.log"
-fi
-
-if [ -f "${LOGFILE}" ]
-then
-    echo "I: Logfile already exists, will not rewrite => exiting." 1>&2
-    exit 1
-fi
-
 for s in ${HOOKS_DIR}/*.sh
 do
     if [ -x "${s}" ]
     then
         echo "# BEGIN: --$(basename ${s})-- #" >>${LOGFILE}
-        ${s} >>${LOGFILE}
+        ${s}
         echo "# END:   --$(basename ${s})-- #" >>${LOGFILE}
     fi
 done
-echo "I: Log saved to ${LOGFILE}." 1>&2
-
