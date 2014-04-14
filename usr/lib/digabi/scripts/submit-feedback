@@ -8,7 +8,7 @@
 # Author: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
 # GPLv3
 #
-SUBMIT_URL="$(digabi config get feedback_url)"
+SUBMIT_URL="$(digabi config get --global feedback_url)"
 HOOKS_DIR="/usr/lib/digabi/feedback-hooks"
 LOGFILE="$(mktemp digabi-feedback.XXXXXXX.log)"
 APPNAME="digabi-feedback"
