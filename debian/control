@@ -5,7 +5,7 @@ Standards-Version: 3.9.2
 
 Package: digabi-feedback
 Maintainer: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
-Depends: digabi-common, zenity
+Depends: digabi-common, zenity, curl
 Changelog: debian/changelog
 Files: usr/lib/digabi/scripts/submit-feedback /
  usr/lib/digabi/scripts/collect-feedback /
