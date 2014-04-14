@@ -12,6 +12,7 @@ Files: usr/lib/digabi/scripts/submit-feedback /
  etc/sudoers.d/digabi-feedback /
  etc/skel/Desktop/submit-feedback.desktop /
  usr/lib/digabi/feedback-hooks/000-id.sh /
+ usr/lib/digabi/feedback-hooks/001-version.sh /
  usr/lib/digabi/feedback-hooks/010-cpuinfo.sh /
  usr/lib/digabi/feedback-hooks/011-cmdline.sh /
  usr/lib/digabi/feedback-hooks/011-meminfo.sh /
