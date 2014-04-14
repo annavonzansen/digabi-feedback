@@ -9,6 +9,7 @@ Depends: digabi-common, zenity, curl
 Changelog: debian/changelog
 Files: usr/lib/digabi/scripts/submit-feedback /
  usr/lib/digabi/scripts/collect-feedback /
+ etc/digabi/feedback /
  etc/sudoers.d/digabi-feedback /
  etc/skel/Desktop/submit-feedback.desktop /
  usr/lib/digabi/feedback-hooks/000-id.sh /

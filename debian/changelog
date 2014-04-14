@@ -1,3 +1,9 @@
+digabi-feedback (2.1.4) unstable; urgency=medium
+
+  * Read submission URL with `digabi config get feedback_url`.
+
+ -- Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>  Mon, 14 Apr 2014 17:46:42 +0300
+
 digabi-feedback (2.1.3) unstable; urgency=medium
 
   * Added curl to depends (can't submit data otherwise...) 
