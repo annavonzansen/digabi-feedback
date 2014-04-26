@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION_FILE="/etc/digabi-version"
+VERSION_FILE="/var/lib/digabi/version"
 
 if [ -f "${VERSION_FILE}" ]
 then
