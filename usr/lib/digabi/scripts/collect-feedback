@@ -3,18 +3,33 @@
 #
 # Collect system information using hooks, save to file.
 #
-# (c) 2013 The Matriculation Examination Board of Finland
+# (c) 2013,2014 The Matriculation Examination Board of Finland
 # http://digabi.fi/
 # Author: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
 # GPLv3
 HOOKS_DIR="/usr/lib/digabi/feedback-hooks"
+OUTPUT="${1}"
 
+# Count hook file in order to get zenity progressbar step size
+TOTAL_COUNTER=0
 for s in ${HOOKS_DIR}/*.sh
+do
+    TOTAL_COUNTER=$((TOTAL_COUNTER + 1))
+done
+
+# Calculate step size
+ZENITY_STEP=$((100/TOTAL_COUNTER))
+
+PROGRESS=0
+(for s in ${HOOKS_DIR}/*.sh
 do
     if [ -x "${s}" ]
     then
-        echo "# BEGIN: --$(basename ${s})-- #"
-        ${s}
-        echo "# END:   --$(basename ${s})-- #"
+        echo "# BEGIN: --$(basename ${s})-- #" >>${OUTPUT}
+        ${s} >>${OUTPUT}
+        echo "# END:   --$(basename ${s})-- #" >>${OUTPUT}
+        PROGRESS=$((PROGRESS+ZENITY_STEP))
+        echo ${PROGRESS} 
     fi
 done
+echo "100") | zenity --progress --title="Wait" --auto-close --no-cancel --text="Please wait..."
