@@ -34,6 +34,8 @@ Sähköpostiosoitettasi ei säilytetä ohjeiden lähettämisen jälkeen.\n\n\
 - Jos haluat lisäohjeet sähköpostilla, anna osoitteesi alla.\n\
 - Napsauta Peruuta, jos et halua ottaa osaa juuri nyt."
   MESSAGE_CANCELLED="Tietojen lähetys on peruutettu. Käynnistä tämä sovellus uudelleen, jos haluat lähettää tiedot."
+  MESSAGE_SUBMIT_OK="Tietojen lähetys onnistui"
+  MESSAGE_SUBMIT_FAILED="Tietojen lähetys epäonnistui\n"
 
 elif [ "${THIS_LANG}" == "sv" ]; then
   # Swedish
@@ -53,6 +55,8 @@ to you.\n\n\
 - Please enter your email if you would like to receive the instructions.\n\
 - Click Cancel if you don't want to participate at the moment."
   MESSAGE_CANCELLED="På svenska: Data submission cancelled per your request. Re-run this application if you want to submit."
+  MESSAGE_SUBMIT_OK="På svenska: Data submitted successfully"
+  MESSAGE_SUBMIT_FAILED="På svenska: Data submission failed\n"
 
 else
   # Fallback: English
@@ -72,12 +76,13 @@ to you.\n\n\
 - Please enter your email if you would like to receive the instructions.\n\
 - Click Cancel if you don't want to participate at the moment."
   MESSAGE_CANCELLED="Data submission cancelled per your request. Re-run this application if you want to submit."
+  MESSAGE_SUBMIT_OK="Data submitted successfully"
+  MESSAGE_SUBMIT_FAILED="Data submission failed\n"
 
 fi
 
 collect_data() {
   sudo /usr/bin/digabi collect-feedback ${LOGFILE}
-  echo "TODO"
 }
 
 ask_permission() {
@@ -130,14 +135,20 @@ with_backoff () {
   if [[ $exitCode != 0 ]]
   then
     echo "You've failed me for the last time! ($@)" 1>&2
+    echo "999:backoff"
   fi
 
   return $exitCode
 }
 
-if [ -r "${LOGFILE}" ]
-   then
-       with_backoff curl -F"dup=true" -F"version=2.0" -F"email=${EMAIL}" -F"data=@${LOGFILE}" "${SUBMIT_URL}"
+if [ -r "${LOGFILE}" ]; then
+  RESULT=`with_backoff curl -s -F"dup=true" -F"version=2.0" -F"email=${EMAIL}" -F"data=@${LOGFILE}" "${SUBMIT_URL}"`
+  RESULT_CODE=`echo "${RESULT}" | cut -f1 -d":"`
+  if [ "${RESULT_CODE}" == "0" ]; then
+     zenity --info --title="${APPNAME}" --text="${MESSAGE_SUBMIT_OK}"
+  else
+     zenity --error --title"${APPNAME}" --text="${MESSAGE_SUBMIT_FAILED}${RESULT}"
+  fi
 fi
 
 #if [ ! -z "${LOGFILE}" ]
