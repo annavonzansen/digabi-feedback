@@ -147,7 +147,7 @@ if [ -r "${LOGFILE}" ]; then
   if [ "${RESULT_CODE}" == "0" ]; then
      zenity --info --title="${APPNAME}" --text="${MESSAGE_SUBMIT_OK}"
   else
-     zenity --error --title"${APPNAME}" --text="${MESSAGE_SUBMIT_FAILED}${RESULT}"
+     zenity --error --title="${APPNAME}" --text="${MESSAGE_SUBMIT_FAILED}Error: \"${RESULT}\""
   fi
 fi
 
