@@ -27,4 +27,7 @@ Files: usr/lib/digabi/scripts/submit-feedback /
  usr/lib/digabi/feedback-hooks/019-lsmod.sh /
  usr/lib/digabi/feedback-hooks/020-dmesg.sh /
  usr/lib/digabi/feedback-hooks/021-dmidecode.sh /
+ usr/lib/digabi/feedback-hooks/022-xdpyinfo.sh /
+ usr/lib/digabi/feedback-hooks/023-xrandr.sh /
+ usr/lib/digabi/feedback-hooks/024-route.sh /
 Description: Collects device information and submits it to Digabi project, if user allows.
