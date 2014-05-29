@@ -142,7 +142,7 @@ with_backoff () {
 }
 
 if [ -r "${LOGFILE}" ]; then
-  RESULT=`with_backoff curl -s -F"dup=true" -F"version=2.0" -F"email=${EMAIL}" -F"data=@${LOGFILE}" "${SUBMIT_URL}"`
+  RESULT=`with_backoff curl -s -F"digabihw_version=2.0" -F"digabihw_email=${EMAIL}" -F"digabihw_data=@${LOGFILE}" "${SUBMIT_URL}"`
   RESULT_CODE=`echo "${RESULT}" | cut -f1 -d":"`
   if [ "${RESULT_CODE}" == "0" ]; then
      zenity --info --title="${APPNAME}" --text="${MESSAGE_SUBMIT_OK}"
