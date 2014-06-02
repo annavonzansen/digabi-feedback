@@ -1,0 +1,407 @@
+# BEGIN: --000-id.sh-- #
+3116c953fcd8955842f12ee7dafd7328  -
+# END:   --000-id.sh-- #
+# BEGIN: --010-cpuinfo.sh-- #
+I: Reading input file (/proc/cpuinfo).
+processor	: 0
+vendor_id	: GenuineIntel
+model name	: Intel(R) Core(TM) i7-2677M CPU @ 1.80GHz
+cpu MHz		: 1807.933
+# END:   --010-cpuinfo.sh-- #
+# BEGIN: --011-cmdline.sh-- #
+I: Reading input file (/proc/cmdline).
+boot=live config quiet splash security=apparmor locales=fi_FI.UTF-8 keyboard-layouts=fi initrd=/live/initrd.img BOOT_IMAGE=/live/vmlinuz 
+# END:   --011-cmdline.sh-- #
+# BEGIN: --011-meminfo.sh-- #
+I: Reading input file (/proc/meminfo).
+MemTotal:         897320 kB
+MemFree:          786512 kB
+# END:   --011-meminfo.sh-- #
+# BEGIN: --012-devices.sh-- #
+I: Reading input file (/proc/devices).
+Character devices:
+  1 mem
+  4 /dev/vc/0
+  4 tty
+  4 ttyS
+  5 /dev/tty
+  5 /dev/console
+  5 /dev/ptmx
+  7 vcs
+ 10 misc
+ 13 input
+ 21 sg
+ 29 fb
+116 alsa
+128 ptm
+136 pts
+180 usb
+189 usb_device
+253 hidraw
+254 bsg
+
+Block devices:
+259 blkext
+  7 loop
+  8 sd
+ 11 sr
+ 65 sd
+ 66 sd
+ 67 sd
+ 68 sd
+ 69 sd
+ 70 sd
+ 71 sd
+128 sd
+129 sd
+130 sd
+131 sd
+132 sd
+133 sd
+134 sd
+135 sd
+# END:   --012-devices.sh-- #
+# BEGIN: --013-uptime.sh-- #
+I: Executing command (/usr/bin/uptime).
+ 15:14:11 up 0 min, 0 users, load average: 0.22, 0.05, 0.02
+# END:   --013-uptime.sh-- #
+# BEGIN: --014-virt-what.sh-- #
+I: Executing command (/usr/sbin/virt-what).
+virtualbox
+# END:   --014-virt-what.sh-- #
+# BEGIN: --015-imvirt.sh-- #
+I: Executing command (/usr/bin/imvirt).
+Physical
+# END:   --015-imvirt.sh-- #
+# BEGIN: --016-lshw.sh-- #
+I: Executing command (/usr/bin/lshw).
+digabi-live
+    description: Computer
+    product: VirtualBox ()
+    vendor: innotek GmbH
+    version: 1.2
+    serial: 0
+    width: 32 bits
+    capabilities: smbios-2.5 dmi-2.5
+    configuration: family=Virtual Machine uuid=THIS_UUID_IS_MASKED
+  *-core
+       description: Motherboard
+       product: VirtualBox
+       vendor: Oracle Corporation
+       physical id: 0
+       version: 1.2
+       serial: 0
+     *-firmware
+          description: BIOS
+          vendor: innotek GmbH
+          physical id: 0
+          version: VirtualBox
+          date: 12/01/2006
+          size: 128KiB
+          capabilities: isa pci cdboot bootselect int9keyboard int10video acpi
+     *-memory
+          description: System memory
+          physical id: 1
+          size: 876MiB
+     *-cpu
+          product: Intel(R) Core(TM) i7-2677M CPU @ 1.80GHz
+          vendor: Intel Corp.
+          physical id: 2
+          bus info: cpu@0
+          version: 6.10.7
+          serial: THIS_SERIAL_IS_MASKED
+          size: 1800MHz
+          width: 64 bits
+          capabilities: fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp x86-64 constant_tsc up pni monitor ssse3 lahf_lm
+     *-pci
+          description: Host bridge
+          product: 440FX - 82441FX PMC [Natoma]
+          vendor: Intel Corporation
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 02
+          width: 32 bits
+          clock: 33MHz
+        *-isa
+             description: ISA bridge
+             product: 82371SB PIIX3 ISA [Natoma/Triton II]
+             vendor: Intel Corporation
+             physical id: 1
+             bus info: pci@0000:00:01.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: isa bus_master
+             configuration: latency=0
+        *-ide
+             description: IDE interface
+             product: 82371AB/EB/MB PIIX4 IDE
+             vendor: Intel Corporation
+             physical id: 1.1
+             bus info: pci@0000:00:01.1
+             logical name: scsi0
+             logical name: scsi1
+             version: 01
+             width: 32 bits
+             clock: 33MHz
+             capabilities: ide bus_master emulated
+             configuration: driver=ata_piix latency=64
+             resources: irq:0 ioport:1f0(size=8) ioport:3f6 ioport:170(size=8) ioport:376 ioport:d000(size=16)
+           *-cdrom:0
+                description: DVD reader
+                physical id: 0
+                bus info: scsi@0:0.0.0
+                logical name: /dev/cdrom
+                logical name: /dev/dvd
+                logical name: /dev/sr0
+                logical name: /lib/live/mount/medium
+                capabilities: audio dvd partitioned partitioned:dos
+                configuration: mount.fstype=iso9660 mount.options=ro,noatime signature=1de14986 state=mounted status=ready
+              *-volume UNCLAIMED
+                   description: Hidden HPFS/NTFS partition
+                   physical id: 1
+                   bus info: scsi@0:0.0.0,1
+                   capacity: 636MiB
+                   capabilities: primary bootable hidden
+           *-cdrom:1
+                description: DVD reader
+                physical id: 1
+                bus info: scsi@1:0.0.0
+                logical name: /dev/cdrom1
+                logical name: /dev/dvd1
+                logical name: /dev/sr1
+                capabilities: audio dvd partitioned partitioned:dos
+                configuration: signature=475fa272 status=ready
+              *-volume UNCLAIMED
+                   description: Hidden HPFS/NTFS partition
+                   physical id: 1
+                   bus info: scsi@1:0.0.0,1
+                   capacity: 753MiB
+                   capabilities: primary bootable hidden
+        *-display UNCLAIMED
+             description: VGA compatible controller
+             product: VirtualBox Graphics Adapter
+             vendor: InnoTek Systemberatung GmbH
+             physical id: 2
+             bus info: pci@0000:00:02.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: vga_controller bus_master
+             configuration: latency=0
+             resources: memory:e0000000-e0ffffff
+        *-network
+             description: Ethernet interface
+             product: 82540EM Gigabit Ethernet Controller
+             vendor: Intel Corporation
+             physical id: 3
+             bus info: pci@0000:00:03.0
+             logical name: eth0
+             version: 02
+             serial: 08:00:27:13:ff:ff
+             size: 1Gbit/s
+             capacity: 1Gbit/s
+             width: 32 bits
+             clock: 66MHz
+             capabilities: pm pcix bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+             configuration: autonegotiation=on broadcast=yes driver=e1000 driverversion=7.3.21-k8-NAPI duplex=full firmware=N/A ip=10.0.2.15 latency=64 link=yes mingnt=255 multicast=yes port=twisted pair speed=1Gbit/s
+             resources: irq:10 memory:f0000000-f001ffff ioport:d010(size=8)
+        *-generic UNCLAIMED
+             description: System peripheral
+             product: VirtualBox Guest Service
+             vendor: InnoTek Systemberatung GmbH
+             physical id: 4
+             bus info: pci@0000:00:04.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: bus_master
+             configuration: latency=0
+             resources: ioport:d020(size=32) memory:f0400000-f07fffff memory:f0800000-f0803fff
+        *-multimedia
+             description: Multimedia audio controller
+             product: 82801AA AC'97 Audio Controller
+             vendor: Intel Corporation
+             physical id: 5
+             bus info: pci@0000:00:05.0
+             version: 01
+             width: 32 bits
+             clock: 33MHz
+             capabilities: bus_master
+             configuration: driver=snd_intel8x0 latency=64
+             resources: irq:5 ioport:d100(size=256) ioport:d200(size=64)
+        *-usb
+             description: USB controller
+             product: KeyLargo/Intrepid USB
+             vendor: Apple Inc.
+             physical id: 6
+             bus info: pci@0000:00:06.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: ohci bus_master cap_list
+             configuration: driver=ohci_hcd latency=64
+             resources: irq:11 memory:f0804000-f0804fff
+        *-bridge UNCLAIMED
+             description: Bridge
+             product: 82371AB/EB/MB PIIX4 ACPI
+             vendor: Intel Corporation
+             physical id: 7
+             bus info: pci@0000:00:07.0
+             version: 08
+             width: 32 bits
+             clock: 33MHz
+             capabilities: bridge bus_master
+             configuration: latency=0
+        *-storage
+             description: SATA controller
+             product: 82801HM/HEM (ICH8M/ICH8M-E) SATA Controller [AHCI mode]
+             vendor: Intel Corporation
+             physical id: d
+             bus info: pci@0000:00:0d.0
+             logical name: scsi2
+             version: 02
+             width: 32 bits
+             clock: 33MHz
+             capabilities: storage pm ahci_1.0 bus_master cap_list emulated
+             configuration: driver=ahci latency=64
+             resources: irq:5 ioport:d240(size=8) ioport:d250(size=8) ioport:d260(size=16) memory:f0806000-f0807fff
+           *-disk
+                description: ATA Disk
+                product: VBOX HARDDISK
+                physical id: 0.0.0
+                bus info: scsi@2:0.0.0
+                logical name: /dev/sda
+                version: 1.0
+                serial: THIS_SERIAL_IS_MASKED
+                size: 14GiB (15GB)
+                capabilities: partitioned partitioned:dos
+                configuration: ansiversion=5 sectorsize=512 signature=000d9b2a
+              *-volume:0
+                   description: Linux filesystem partition
+                   vendor: Linux
+                   physical id: 1
+                   bus info: scsi@2:0.0.0,1
+                   logical name: /dev/sda1
+                   version: 1.0
+                   serial: THIS_SERIAL_IS_MASKED
+                   size: 243MiB
+                   capacity: 243MiB
+                   capabilities: primary bootable ext2 initialized
+                   configuration: filesystem=ext2 modified=2013-08-12 15:13:19 state=clean
+              *-volume:1
+                   description: Extended partition
+                   physical id: 2
+                   bus info: scsi@2:0.0.0,2
+                   logical name: /dev/sda2
+                   size: 14GiB
+                   capacity: 14GiB
+                   capabilities: primary extended partitioned partitioned:extended
+                 *-logicalvolume
+                      description: Linux LVM Physical Volume partition
+                      physical id: 5
+                      logical name: /dev/sda5
+                      serial: THIS_SERIAL_IS_MASKED
+                      size: 14GiB
+                      capacity: 14GiB
+                      capabilities: multi lvm2
+# END:   --016-lshw.sh-- #
+# BEGIN: --017-lspci.sh-- #
+I: Executing command (/usr/bin/lspci).
+00:00.0 Host bridge: Intel Corporation 440FX - 82441FX PMC [Natoma] (rev 02)
+00:01.0 ISA bridge: Intel Corporation 82371SB PIIX3 ISA [Natoma/Triton II]
+00:01.1 IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE (rev 01)
+00:02.0 VGA compatible controller: InnoTek Systemberatung GmbH VirtualBox Graphics Adapter
+00:03.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller (rev 02)
+00:04.0 System peripheral: InnoTek Systemberatung GmbH VirtualBox Guest Service
+00:05.0 Multimedia audio controller: Intel Corporation 82801AA AC'97 Audio Controller (rev 01)
+00:06.0 USB controller: Apple Inc. KeyLargo/Intrepid USB
+00:07.0 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI (rev 08)
+00:0d.0 SATA controller: Intel Corporation 82801HM/HEM (ICH8M/ICH8M-E) SATA Controller [AHCI mode] (rev 02)
+# END:   --017-lspci.sh-- #
+# BEGIN: --018-lsusb.sh-- #
+I: Executing command (/usr/bin/lsusb).
+Bus 001 Device 002: ID 80ee:0021 VirtualBox USB Tablet
+Bus 001 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+# END:   --018-lsusb.sh-- #
+# BEGIN: --019-lsmod.sh-- #
+I: Executing command (/bin/lsmod).
+Module                  Size  Used by
+ipt_LOG                 5525  1 
+xt_limit                1436  1 
+xt_tcpudp               2182  5 
+nf_conntrack_ipv4       9194  1 
+nf_defrag_ipv4          1259  1 nf_conntrack_ipv4
+xt_conntrack            2793  1 
+nf_conntrack           40577  2 xt_conntrack,nf_conntrack_ipv4
+iptable_filter          1380  1 
+ip_tables               8890  1 iptable_filter
+x_tables                9995  6 ip_tables,iptable_filter,xt_conntrack,xt_tcpudp,xt_limit,ipt_LOG
+snd_intel8x0           21347  0 
+snd_ac97_codec         78213  1 snd_intel8x0
+i2c_piix4               7266  0 
+battery                 5618  0 
+ac                      2056  0 
+psmouse                43689  0 
+snd_pcm                53820  2 snd_ac97_codec,snd_intel8x0
+power_supply            6155  2 ac,battery
+snd_page_alloc          5835  2 snd_pcm,snd_intel8x0
+ac97_bus                1142  1 snd_ac97_codec
+serio_raw               3569  0 
+snd_timer              13109  1 snd_pcm
+button                  3793  0 
+i2c_core               13999  1 i2c_piix4
+snd                    37532  4 snd_timer,snd_pcm,snd_ac97_codec,snd_intel8x0
+soundcore               3981  1 snd
+pcspkr                  1686  0 
+evdev                   7477  5 
+usbhid                 26917  0 
+hid                    57068  1 usbhid
+squashfs               22826  1 
+loop                   12529  2 
+aufs                  125141  70 
+nls_utf8                1344  1 
+isofs                  25433  1 
+microcode               8956  0 
+sg                     18349  0 
+sd_mod                 27462  0 
+sr_mod                 11523  1 
+crc_t10dif              1416  1 sd_mod
+cdrom                  27418  1 sr_mod
+ata_generic             2539  0 
+ahci                   18385  0 
+libahci                13795  1 ahci
+ata_piix               18719  1 
+libata                116557  4 ata_piix,libahci,ahci,ata_generic
+ohci_hcd               16040  0 
+ehci_hcd               30750  0 
+usbcore                98699  3 ehci_hcd,ohci_hcd,usbhid
+scsi_mod              132621  4 libata,sr_mod,sd_mod,sg
+e1000                  78122  0 
+usb_common               986  1 usbcore
+# END:   --019-lsmod.sh-- #
+# BEGIN: --020-dmesg.sh-- #
+I: Executing command (/bin/dmesg).
+[   23.780430] grsec: exec of /usr/bin/xkbcomp (/usr/bin/xkbcomp -w 1 -R/usr/share/X11/xkb -xkm - -em1 The XKEYBOARD keymap compiler (xkbcomp) reports: -emp >  -eml Errors from) by /usr/bin/xkbcomp[sh:2700] uid/euid:0/0 gid/egid:0/0, parent /bin/dash[sh:2699] uid/euid:0/0 gid/egid:0/0
+[   23.978060] grsec: exec of /usr/bin/xkbcomp (/usr/bin/xkbcomp -w 1 -R/usr/share/X11/xkb -xkm - -em1 The XKEYBOARD keymap compiler (xkbcomp) reports: -emp >  -eml Errors from) by /usr/bin/xkbcomp[sh:2702] uid/euid:0/0 gid/egid:0/0, parent /bin/dash[sh:2701] uid/euid:0/0 gid/egid:0/0
+[   24.312026] grsec: exec of /bin/touch (touch /home/digabi/.xsession-errors ) by /bin/touch[Xsession:2784] uid/euid:1000/1000 gid/egid:1000/1000, parent /etc/X11/Xsession[Xsession:2782] uid/euid:1000/1000 gid/egid:1000/1000
+[   24.317772] grsec: exec of /bin/chmod (chmod 600 /home/digabi/.xsession-errors ) by /bin/chmod[Xsession:2786] uid/euid:1000/1000 gid/egid:1000/1000, parent /etc/X11/Xsession[Xsession:2782] uid/euid:1000/1000 gid/egid:1000/1000
+[   27.783096] grsec: exec of /bin/grep (grep -i error ) by /bin/grep[020-dmesg.sh:2912] uid/euid:0/0 gid/egid:0/0, parent /usr/lib/digabi/collect-hooks/020-dmesg.sh[020-dmesg.sh:2910] uid/euid:0/0 gid/egid:0/0
+# END:   --020-dmesg.sh-- #
+# BEGIN: --021-dmidecode.sh-- #
+I: Executing command (/usr/sbin/dmidecode).
+# dmidecode 2.12
+SMBIOS 2.5 present.
+
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+	Manufacturer: innotek GmbH
+	Product Name: VirtualBox
+	Version: 1.2
+	Serial Number: 0
+	UUID: THIS_UUID_IS_MASKED
+	Wake-up Type: Power Switch
+	SKU Number: Not Specified
+	Family: Virtual Machine
+
+# END:   --021-dmidecode.sh-- #
