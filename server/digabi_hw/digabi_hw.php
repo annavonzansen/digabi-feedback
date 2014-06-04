@@ -272,8 +272,10 @@ function digabihw_show_custom_fields ($post_content) {
            
            foreach ($hw_post_data as $this_manufacturer => $this_data) {
                $shortcode_replacement .= "<li>".$this_manufacturer;
-               foreach ($this_data as $this_product => $this_url) {
-                   $shortcode_replacement .= "<br/><a href='$this_url'>$this_product</a>";
+               foreach ($this_data as $this_product => $this_url_array) {
+                   foreach ($this_url_array as $this_url) {
+                       $shortcode_replacement .= "<br/><a href='$this_url'>$this_product</a>";
+                   }
                }
                $shortcode_replacement .= "</li>";
            }

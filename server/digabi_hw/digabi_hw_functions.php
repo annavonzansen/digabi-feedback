@@ -117,14 +117,23 @@ function digabihw_register_taxonomy () {
  * to the hardware report custom post.
  * Array(
  *  [Acer] => Array (
- *          [Aspire E1-470] => https://harkko.lattu.biz/wp/?p=23
- *          [One] => https://harkko.lattu.biz/wp/?p=69
+ *          [Aspire E1-470] => Array(
+ *              'https://harkko.lattu.biz/wp/?p=23',
+ *              'https://harkko.lattu.biz/wp/?p=13'
+ *              ),
+ *          [One] => Array(
+ *              'https://harkko.lattu.biz/wp/?p=69'
+ *              )
  *      )
  *  [Intel(R) Corporation] => Array (
- *          [Aspire E1-470] => https://harkko.lattu.biz/wp/?p=14
+ *          [Aspire E1-470] => Array(
+ *              'https://harkko.lattu.biz/wp/?p=14'
+ *              )
  *      )
  *  [innotek GmbH] => Array (
- *          [VirtualBox] => https://harkko.lattu.biz/wp/?p=12
+ *          [VirtualBox] => Array(
+ *              'https://harkko.lattu.biz/wp/?p=12'
+ *              )
  *      )
  * )
  * @return array Array of all hardware reports.
@@ -149,7 +158,12 @@ function digabihw_enumerate_posts () {
             
             if ($this_manufacturer != '' and $this_product_name != '') {
                 // Store data to the array
-                $data[$this_manufacturer][$this_product_name] = wp_get_shortlink($this_post->ID);
+                if (is_array($data[$this_manufacturer][$this_product_name])) {
+                    array_push($data[$this_manufacturer][$this_product_name], wp_get_shortlink($this_post->ID));
+                }
+                else {
+                    $data[$this_manufacturer][$this_product_name] = Array(wp_get_shortlink($this_post->ID));
+                }
             }
         }
     }
@@ -195,23 +209,47 @@ function digabihw_enumerate_post_data () {
 }
 
 /**
+ * Calculates hash to the values of a given data array. This function can be
+ * used to calculate a hash value to be used as "digabihw_hash".
+ * @param type $data
+ * @return string Hash value, NULL on failure
+ */
+function digabihw_get_hash ($data) {
+    $data_string = '';
+    
+    if (!ksort($data)) {
+        // Failed to sort data
+        return NULL;
+    }
+    
+    // Add all values to data string
+    foreach ($data as $this_key => $this_value) {
+        $data_string .= $this_value;
+    }
+    
+    if ($data_string == '') {
+        // data string is empty -> fail
+        return NULL;
+    }
+    
+    // Return whatever sha1() returns
+    return sha1($data_string);
+}
+
+/**
  * Checks whether HW report already exists for a manufacturer/product name combination.
- * @param string $manufacturer Manufacturer string (custom field digabihw_manufacturer)
- * @param string $product Product string (custom field digabihw_product_name)
+ * @param string $hash Hash value to check
  * @return array If HW entries already exists returns array of permalinks, otherwise NULL..
  */
-function digabihw_machine_already_exists ($manufacturer, $product) {
+function digabihw_machine_already_exists ($hash) {
+    $hash = strtolower($hash);
+    
     $search_array = Array(
         'post_type' => 'digabihw_report',
         'meta_query' => Array(
             Array(
-                'key' => 'digabihw_manufacturer',
-                'value' => $manufacturer,
-                'compare' => '='
-            ),
-            Array(
-                'key' => 'digabihw_product_name',
-                'value' => $product,
+                'key' => 'digabihw_hash',
+                'value' => $hash,
                 'compare' => '='
             )
         )

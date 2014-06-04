@@ -63,7 +63,16 @@ function digabihw_process_data_file ($filename) {
             $extracted_fields['manufacturer'] = '-';
 			}
 			
-         $url_already_exists = digabihw_machine_already_exists($extracted_fields['manufacturer'], $extracted_fields['product_name']);
+         // Get SHA1 hash for the extracted data
+         $this_hash = digabihw_get_hash($extracted_fields);
+         if (is_null($this_hash)) {
+             // We got an error from the hash function
+             digabihw_warning("Could not count unique hash value from an incoming data file '".$filename."'. This file will not be processed.");
+             // Skip this file
+             continue;
+         }
+         
+         $url_already_exists = digabihw_machine_already_exists($this_hash);
          if (!is_null($url_already_exists)) {
              // We already have entry for this machine
              
@@ -117,6 +126,9 @@ function digabihw_process_data_file ($filename) {
             // Store custom field names to the post
             add_post_meta($wp_post_id, 'digabihw_fields', join(':', array_keys($extracted_fields)), TRUE);
             
+            // Store hash value to the post
+            add_post_meta($wp_post_id, 'digabihw_hash', $this_hash, TRUE);
+                    
             // Add category for Manufacturer (if we have a manufacturer)
             if ($extracted_fields['manufacturer']) {
                 // Using custom taxonomy 'digabihw_dev'

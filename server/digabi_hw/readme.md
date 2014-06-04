@@ -46,14 +46,18 @@ After this the data is only read. The field names have a prefix `digabihw_`.
 
 There are some fields with special meaning:
 
+* *digabihw_fields* contains a colon-separated (:) list of field names reported
+  by the Digabi_Feedback. The field names are stored without the prefix
+  ("digabihw_").
+* *digabihw_hash* is a SHA1 hash of the values of `digabihw_fields`
+  variables. This hash is used to detect whether a submitted hardware report
+  is an existing (`digabihw_counter` is added by one) or a new one (a new
+  custom post is generated).
 * *digabihw_counter* is a counter for reports for an unique combination of
   a Manufacturer and a Product Name.
 * *digabihw_status* contains one or more status codes for the post. The valid
   status codes are defined in the $DIGABIHW_POST_STATUS (settings.php). The
   string is a colon-separated (:).
-* *digabihw_fields* contains a colon-separated (:) list of field names reported
-  by the Digabi_Feedback. The field names are stored without the prefix
-  ("digabihw_").
 
 Other fields are used to store whatever data is detected from the flat-file
 report by the Digabi_Feedback class (Digabi_Feedback.php). The field names
