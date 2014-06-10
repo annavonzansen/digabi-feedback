@@ -172,6 +172,43 @@ function digabihw_send_email ($email, $url) {
     return mail($email, $DIGABIHW_EMAIL_SETTINGS['subject'], $message, $DIGABIHW_EMAIL_SETTINGS['additional_headers']);
 }
 
+/**
+ * Returns a random string. Used to create an unique ID for captcha.
+ * @param int $length Length of the random string
+ * @return string Random string
+ */
+function digabihw_rand_string($length) {
+	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";	
+
+	$size = strlen( $chars );
+   $str = '';
+	for( $i = 0; $i < $length; $i++ ) {
+		$str .= $chars[ rand( 0, $size - 1 ) ];
+	}
+
+	return $str;
+}
+
+/**
+ * Remove old entries from captcha registry
+ * @param type $timeframe If the entry is older than this (seconds) the entry will be deleted.
+ */
+function digabihw_captcha_cleanup ($timeframe) {
+    $all_options = wp_load_alloptions();
+    
+    foreach ($all_options as $this_option_name => $this_option_value) {
+        if (preg_match('/^digabihw_captcha_time_(\w+)/', $this_option_name, $match)) {
+            // We found a key which belongs us
+            $this_id = $match[1];
+            
+            if ($this_option_value < time()-$timeframe) {
+                // The option is outdated
+                delete_option('digabihw_captcha_time_'.$this_id);
+                delete_option('digabihw_captcha_code_'.$this_id);
+            }
+        }
+    }
+}
 
 // Main program
 // FIXME: Rewrite this according to https://willnorris.com/2009/06/wordpress-plugin-pet-peeve-2-direct-calls-to-plugin-files
@@ -188,11 +225,107 @@ function digabihw_register_queryvars ($vars) {
     $vars[] = 'digabihw_version';
     $vars[] = 'digabihw_email';
     $vars[] = 'digabihw_data';
+    $vars[] = 'digabihw_captcha_id';
+    $vars[] = 'digabihw_captcha_code';
     return $vars;
 }
 
 function digabihw_process_feedback ($wp) {
     global $DIGABIHW_SAVEPATH;
+    
+    /**
+     * This function echoes result code + message to the client. The code
+     * and message are separated with colon:
+     * 0:OK
+     * 
+     * Following messages are implemented:
+     * 0:URL_TO_THE_POST
+     * 1:No post URL (creating a post failed)
+     * 2:Unknown Captcha ID (user supplied an unknown ID)
+     * 3:Captcha check failed (user supplied a captcha code which differs from
+     *        the code in the image)
+     */
+    
+    /**
+     * Captcha checking has three stages:
+     * 1) Client asks for a Captcha ID (query: digabihw_captcha_id=0). This
+     *    replaces the session variable as the clients don't support it.
+     *    This option reservers a new ID and prints it to the client.
+     * 2) Client asks for the captcha image (query: digabihw_captcha_id=$ID).
+     *    This is created using Securimage class. This option creates a new
+     *    captcha image, prints is to the user and stores the correct code.
+     * 3) Client posts the full data including the captcha codes
+     *    (query: digabihw_captcha_id=$ID & digabihw_captcha_code=$CODE). This
+     *    option verifies the saved code with the provided code. If the codes
+     *    differ returns a error code & message and exits. 
+     */
+    if (array_key_exists('digabihw_captcha_id', $wp->query_vars) and $wp->query_vars['digabihw_captcha_id'] == '0') {
+        // Captcha ID 0 is given - client requests a new captcha ID
+        
+        // Remove all old captcha settings (database cleanup)
+        digabihw_captcha_cleanup(60);
+    
+        $id_is_unique = false;
+        $new_id = null;
+        
+        while (!$id_is_unique) {
+            // Create a new ID
+            $new_id = digabihw_rand_string(32);
+            
+            // Try if ID is unused - and save the current time
+            $id_is_unique = add_option('digabihw_captcha_time_'.$new_id, time(), null, 'yes');
+        }
+        
+        // Report Captcha ID
+        header("Content-type: text/plain; charset=utf-8");
+        echo($new_id);
+        
+        exit(0);
+    }
+    elseif (array_key_exists('digabihw_captcha_id', $wp->query_vars) and !array_key_exists('digabihw_captcha_code', $wp->query_vars)) {
+        // Captcha ID is given - client requests captcha image
+
+        $given_id = preg_replace('/\W/', '', $wp->query_vars['digabihw_captcha_id']);
+        $stored_time = get_option('digabihw_captcha_time_'.$given_id, null);
+        
+        if (is_null($stored_time)) {
+            header("Content-type: text/plain; charset=utf-8");
+            echo('2:Unknown Captcha ID'.chr(10).chr(10));
+            exit(0);
+        }
+
+        // Create captcha image
+        $securimage = new Securimage(Array('no_exit' => true));
+        $securimage->createCode();
+        
+        // Write the Captcha code (the show() method takes care of the HTTP headers)
+        $securimage->show();
+
+        // Store the captcha code
+        update_option('digabihw_captcha_code_'.$given_id, $securimage->getCode(false, false));
+
+        exit(0);
+    }
+    elseif (array_key_exists('digabihw_captcha_id', $wp->query_vars) and array_key_exists('digabihw_captcha_code', $wp->query_vars)) {
+        $given_id = preg_replace('/\W/', '', $wp->query_vars['digabihw_captcha_id']);
+        $stored_code = get_option('digabihw_captcha_code_'.$given_id, null);
+        
+        if (is_null($stored_code)) {
+            header("Content-type: text/plain; charset=utf-8");
+            echo('2:Unknown Captcha ID'.chr(10).chr(10));
+            exit(0);
+        }
+        
+        if (strtolower($stored_code) != strtolower($wp->query_vars['digabihw_captcha_code'])) {
+            // Stored code and given code differ -> we are dealing with a robot!!!
+            
+            header("Content-type: text/plain; charset=utf-8");
+            echo('3:Captcha check failed'.chr(10).chr(10));
+            exit(0);
+        }
+    }
+
+    // The user has passed the captcha verification
     
     if (array_key_exists('digabihw_version', $wp->query_vars)) {
         // We have incoming data

@@ -5,8 +5,10 @@
 Digabi HW is a Wordpress plugin to receive, store and display Digabi feedback
 reports with WP. The basic flow of execution to receive a hardware report is:
 
-1. Client transmits hardware report using HTTP POST (feedback.php).
-   The flat file is stored to a desired path (`$DIGABIHW_SAVEPATH`).
+1. Client asks a captcha ID and image (digabi_hw_feedback.php).
+2. Client transmits hardware report using HTTP POST (digabi_hw_feedback.php).
+   If the captcha check is passed the the flat file is stored to a desired
+   path (`$DIGABIHW_SAVEPATH`).
 2. Important data is read from the flat file (Digabi_Feedback.php) and stored
    to a Wordpress (feedback.php). For this a custom post type `digabihw_report`
    with custom fields are introduced (digabi_hw.php). The plugin also adds
@@ -131,3 +133,41 @@ files are in `lang/` directory.
    Now you have the `digabi_hw.pot` file.
 3. Translate the pot to a .po and .mo files.
 4. Copy the files to lang/ directory following the existing naming convention.
+
+## FAQ
+
+Securimage captcha library is not working. I get following log entries:
+
+[Mon Jun 09 22:37:04 2014] [error] [client 192.168.201.6] PHP Fatal error:  Call
+to undefined function imagecreate() in
+/your_wp_path/wp-content/plugins/digabi_hw/securimage/securimage.php on line 1413
+
+Solution: Install GD library to your PHP.
+
+## Copyrights
+
+### Digabi HW
+
+Copyright 2014 Matti Lattu and Ville Korhonen
+ 
+Digabi HW is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+### Securimage
+
+Digabi HW utilises Securimage library (http://www.phpcaptcha.org/) to create
+captcha images. Securimage has its own copyright and license.
+
+The securimage subdirectory contains only two files from the Securimage
+distribution package: securimage.php (the copyright and license information
+along with the code itself) and AHGBold.ttf (TTF font file).

@@ -23,6 +23,11 @@ Text Domain: digabi_hw
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ 
+    Please note that the code in the securimage directory is not part of
+    Digabi HW but an third party program that has its own copyright and license.
+ 
  */
 
 // Add hook for internationalisation, also loads global variables
@@ -34,6 +39,9 @@ include_once(ABSPATH.'wp-admin/includes/taxonomy.php');
 include_once(ABSPATH.'wp-content/plugins/digabi_hw/settings.php');
 include_once(ABSPATH.'wp-content/plugins/digabi_hw/digabi_hw_functions.php');
 include_once(ABSPATH.'wp-content/plugins/digabi_hw/digabi_hw_feedback.php');
+
+// Include Securimage for Captcha function
+include_once(ABSPATH.'wp-content/plugins/digabi_hw/securimage/securimage.php');
 
 register_activation_hook(__FILE__, "digabihw_activate");
 register_deactivation_hook(__FILE__, "digabihw_deactivate");
