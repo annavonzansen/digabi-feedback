@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-11 19:59+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /usr/lib/digabi/scripts/submit-feedback:76
+#: /usr/lib/digabi/scripts/submit-feedback:86
+msgid "Could not contact to server. No data was transmitted."
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:100
+msgid "Page 1: About privacy"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:102
+msgid ""
+"The technical data we just collected from your device will be used for "
+"creating list of supported devices and for troubleshooting purposes.\n"
+"\n"
+"This data includes computer model, manufacturer, cpu type, size of the "
+"memory, list of devices etc."
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:105
+msgid "Review Collected Data"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:107
+msgid "Privacy Policy"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:119
+msgid "Page 2: Help with booting"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:122
+msgid ""
+"Booting to USB memory stick may be challenging in some devices. We have made "
+"it easy for you to report BIOS settings required to boot your device. By "
+"entering your email below you will get further instructions how you can "
+"share your BIOS settings and help other users to boot their devices. Your "
+"email address will not be published or stored after we have sent the "
+"instructions to you.\n"
+"\n"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:123
+msgid ""
+"<b>Please enter your email if you would like to receive the instructions.</"
+"b>\n"
+"\n"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:124
+msgid "Do not enter your email if you don't want to participate at the moment."
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:140
+msgid "Page 3: Compatibility"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:143
+msgid ""
+"Please enter your general comments about the possible technical "
+"incompatibilities: screen, keyboard, mouse, touchpad, sound etc."
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:165
+msgid "Page 4: Confirm that you are human"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:167
+msgid ""
+"We want to make sure that only humans create hardware reports. Please repeat "
+"the characters from the image."
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:185
+msgid "Page 5: Ready to submit"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:197
+msgid "Page 6: Results"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:209
+msgid "Finished"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:212
+msgid "Thank you for submitting data!"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:214
+msgid "Open the report page"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:238
+msgid ""
+"Ready to submit following data:\n"
+"\n"
+"1) Techical details of your hardware.\n"
+"\n"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:241
+msgid ""
+"2) You <b>don't want</b> to receive instructions on reporting how you booted "
+"your device.\n"
+"\n"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:243
+#, python-format
+msgid ""
+"2) You gave your email (%s) for instructions on reporting the boot "
+"settings.\n"
+"\n"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:252
+msgid ""
+"3) You <b>have not</b> given any comments on technical compatibility.\n"
+"\n"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:254
+msgid ""
+"3) You have given us comments on techical compatibility.\n"
+"\n"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:257
+msgid ""
+"<b>You have not written the captcha code (please return to the previous "
+"page).</b>"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:285
+msgid "Data was submitted successfully."
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:289
+msgid "Please go back and review the characters you typed from the image."
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:291
+#, python-format
+msgid "Data submission failed (#%s): %s"
+msgstr ""
+
+#: /usr/lib/digabi/scripts/submit-feedback:302
+msgid "Operation cancelled. No data was transmitted."
+msgstr ""

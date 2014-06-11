@@ -27,6 +27,7 @@ import gettext
 from array import array
 import urllib2
 import re
+import inspect
 
 def execute_cmd (cmdstr):
     return os.popen(cmdstr).read()
@@ -41,10 +42,10 @@ SUBMIT_URL=execute_cmd_oneline('digabi config get --global feedback_url')
 URL_DIGABI_PRIVACY=execute_cmd_oneline('digabi config get --global feedback_privacy_url')
 LOGFILE=tempfile.mkstemp(".log", "digabi-feedback.")[1]
 CAPTCHAFILE=tempfile.mkstemp(".png", "digabi-feedback.")[1]
-
+MYPATH=os.path.dirname(inspect.getfile(inspect.currentframe()))
 
 # Set up message catalog access
-t = gettext.translation('digabihw_submit_feedback', 'locale', fallback=True)
+t = gettext.translation('submit-feedback', MYPATH+'/locale', fallback=True)
 _ = t.gettext
 
 class Assistant:
@@ -181,7 +182,7 @@ class Assistant:
         vbox[5] = gtk.VBox()
         vbox[5].set_border_width(5)
         assistant.append_page(vbox[5])
-        assistant.set_page_title(vbox[5], "Page 5: Ready to submit")
+        assistant.set_page_title(vbox[5], _("Page 5: Ready to submit"))
         assistant.set_page_type(vbox[5], gtk.ASSISTANT_PAGE_CONFIRM)
         
         self.final_label = gtk.Label()
@@ -193,7 +194,7 @@ class Assistant:
         vbox[6] = gtk.VBox()
         vbox[6].set_border_width(5)
         assistant.append_page(vbox[6])
-        assistant.set_page_title(vbox[6], "Page 6: Results")
+        assistant.set_page_title(vbox[6], _("Page 6: Results"))
         assistant.set_page_type(vbox[6], gtk.ASSISTANT_PAGE_CONTENT)
         
         self.status_label = gtk.Label()
@@ -205,7 +206,7 @@ class Assistant:
         vbox[7] = gtk.VBox()
         vbox[7].set_border_width(5)
         assistant.append_page(vbox[7])
-        assistant.set_page_title(vbox[7], "Finished")
+        assistant.set_page_title(vbox[7], _("Finished"))
         assistant.set_page_type(vbox[7], gtk.ASSISTANT_PAGE_SUMMARY)
         
         label = gtk.Label(_("Thank you for submitting data!"))
