@@ -259,6 +259,9 @@ function digabihw_process_feedback ($wp) {
      *    option verifies the saved code with the provided code. If the codes
      *    differ returns a error code & message and exits. 
      */
+
+    $ID_LENGTH = 32;
+    
     if (array_key_exists('digabihw_captcha_id', $wp->query_vars) and $wp->query_vars['digabihw_captcha_id'] == '0') {
         // Captcha ID 0 is given - client requests a new captcha ID
         
@@ -270,7 +273,7 @@ function digabihw_process_feedback ($wp) {
         
         while (!$id_is_unique) {
             // Create a new ID
-            $new_id = digabihw_rand_string(32);
+            $new_id = digabihw_rand_string($ID_LENGTH);
             
             // Try if ID is unused - and save the current time
             $id_is_unique = add_option('digabihw_captcha_time_'.$new_id, time(), null, 'yes');
@@ -286,6 +289,12 @@ function digabihw_process_feedback ($wp) {
         // Captcha ID is given - client requests captcha image
 
         $given_id = preg_replace('/\W/', '', $wp->query_vars['digabihw_captcha_id']);
+        if (strlen($given_id) != $ID_LENGTH) {
+            header("Content-type: text/plain; charset=utf-8");
+            echo('2:Unknown Captcha ID'.chr(10).chr(10));
+            exit(0);
+        }
+        
         $stored_time = get_option('digabihw_captcha_time_'.$given_id, null);
         
         if (is_null($stored_time)) {
@@ -308,6 +317,12 @@ function digabihw_process_feedback ($wp) {
     }
     elseif (array_key_exists('digabihw_captcha_id', $wp->query_vars) and array_key_exists('digabihw_captcha_code', $wp->query_vars)) {
         $given_id = preg_replace('/\W/', '', $wp->query_vars['digabihw_captcha_id']);
+        if (strlen($given_id) != $ID_LENGTH) {
+            header("Content-type: text/plain; charset=utf-8");
+            echo('2:Unknown Captcha ID'.chr(10).chr(10));
+            exit(0);
+        }
+        
         $stored_code = get_option('digabihw_captcha_code_'.$given_id, null);
         
         if (is_null($stored_code)) {
