@@ -227,6 +227,7 @@ function digabihw_register_queryvars ($vars) {
     $vars[] = 'digabihw_data';
     $vars[] = 'digabihw_captcha_id';
     $vars[] = 'digabihw_captcha_code';
+    $vars[] = 'digabihw_comment';
     return $vars;
 }
 
