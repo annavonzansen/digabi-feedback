@@ -163,12 +163,21 @@ function digabihw_set_global_settings () {
         'meb' => __("This report has been reviewed by the MEB staff.",'digabi_hw'),
     );
 
+    // Temporary variable to hold message body as heredoc appears not to work
+    // inside array definition.
+    
+    $email_message = <<<DIGABIHW_EMAIL_END
+Menepä raportoimaan BIOS-asetukset osoitteeseen #URL#.
+
+Kiitos!
+DIGABIHW_EMAIL_END;
+    
     /**
      * Parameters used in sending UTF8-encoded email. This constant is used in feedback.php / digabihw_send_email().
      * @global array $DIGABIHW_EMAIL_SETTINGS
      */
     $DIGABIHW_EMAIL_SETTINGS = Array(
-        'message' => "Menepä raportoimaan BIOS-asetukset osoitteeseen #URL#.\n\nKiitos!\n",
+        'message' => $email_message,
         'subject' => '=?UTF-8?B?'.base64_encode("Digabi OS - BIOS").'?=',
         'additional_headers' => "From: digabi@ylioppilastutkinto.fi\r\nMIME-Version: 1.0\r\nContent-type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n",
     );
