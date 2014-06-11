@@ -211,23 +211,18 @@ function digabihw_enumerate_post_data () {
 /**
  * Calculates hash to the values of a given data array. This function can be
  * used to calculate a hash value to be used as "digabihw_hash".
- * @param type $data
+ * @param array $data
  * @return string Hash value, NULL on failure
  */
 function digabihw_get_hash ($data) {
-    $data_string = '';
-    
     if (!ksort($data)) {
         // Failed to sort data
         return NULL;
     }
     
-    // Add all values to data string
-    foreach ($data as $this_key => $this_value) {
-        $data_string .= $this_value;
-    }
+    $data_string = implode(',', array_values($data));
     
-    if ($data_string == '') {
+    if (is_null($data_string) or ($data_string == '')) {
         // data string is empty -> fail
         return NULL;
     }

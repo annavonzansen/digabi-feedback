@@ -73,7 +73,8 @@ class Digabi_Feedback {
       'product_sku' => Array('dmidecode', '/System Information\n.*?\n.*?\n.*?\n.*?\n.*?\nSKU Number: (.+)\n/m', FALSE),
 		'memtotal' => Array('meminfo', '/^MemTotal: (\d+)/m', FALSE),
 		'cpu_model_name' => Array('cpuinfo', '/^model name: (.+)$/m', FALSE),
-		'cpu_freq' => Array('cpuinfo', '/^cpu MHz: ([\d\.]+)$/m', FALSE),
+      // CPU Freqs are not constant but change depending on the system load - creates multiple entries from the same hardware
+		//'cpu_freq' => Array('cpuinfo', '/^cpu MHz: ([\d\.]+)$/m', FALSE),
 		'network_hw' => Array('lshw', 'parse_value_network_hw', TRUE),
 		'multimedia_product' => Array('lshw', '/\*-multimedia[^\*]*product: (.*?)\n/s', TRUE),
 		'multimedia_driver' => Array('lshw', '/\*-multimedia[^\*]*configuration: .*?driver\=(.+?) /s', TRUE),
