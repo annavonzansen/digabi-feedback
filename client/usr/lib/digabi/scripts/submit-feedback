@@ -1,157 +1,360 @@
-#!/bin/bash
+#!/usr/bin/env python
 
 #
 # Submit collected system information to Digabi server
 #
-# (c) 2013, 2014 The Matriculation Examination Board of Finland
-# http://digabi.fi/
-# Author: Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
-# GPLv3
+#    Copyright 2014 Matti Lattu <matti.lattu@ylioppilastutkinto.fi> and
+#                   Ville Korhonen <ville.korhonen@ylioppilastutkinto.fi>
+# 
+#    Digabi HW is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-SUBMIT_URL="$(digabi config get --global feedback_url)"
-HOOKS_DIR="/usr/lib/digabi/feedback-hooks"
-LOGFILE="$(mktemp digabi-feedback.XXXXXXX.log)"
-APPNAME="digabi-feedback"
-LOGFILE_URL="file://$(readlink -f ${LOGFILE})"
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Set outputs according to the language setting
-THIS_LANG=${LANG:0:2}
+import sys
+import os
+import tempfile
+import gtk
+import gettext
+from array import array
+import urllib2
+import re
 
-if [ "${THIS_LANG}" == "fi" ]; then
-  # Finnish
-  MESSAGE_PERMISSION="<b>Haluatko lähettää laitetiedot Digabi-projektille?</b>\n\n\
-Kerättyjä laitetietoja käytetään kertomalla muille käyttäjille toimivista laitekokoonpanoista ja yhteensopivuusongelmien etsimiseen.\n\n\
-Kerätyt tiedot sisältävät tietokoneen merkin ja mallin, prosessorin tyypin, muistin koon, tietoja laitteista jne. <a href='https://digabi.fi/feedback'>Katso kuvaus keräämistämme tiedoista</a> ja <a href='${LOGFILE_URL}'>tutki kerättyä aineistoa</a>.\n\n\
-Tiedot lähetetään salattua yhteyttä käyttäen eikä henkilökohtaisia tietojasi lähetetä.\n\n\
-<a href='https://digabi.fi/privacy'>Lue Digabi-projektin tietosuojasta</a>"
-  # Unfortunately the zenity --entry method does not support Pango Markup Language
-  MESSAGE_ASK_EMAIL="Kerro meille kuinka käynnistit koneesi!\n\n\
-Koneen käynnistäminen USB-muistilta voi olla hankalaa. Me olemme tehneet\n\
-sinulle helpoksi muiden auttamisen. Antamalla sähköpostisi allaolevaan\n\
-kenttään saat sähköpostin. Viestissä kerrotaan, miten voit raportoida käyttämäsi\n\
-BIOS-asetukset ja auttaa näin muita saman konemallin käyttäjiä.\n\n\
-Sähköpostiosoitettasi ei säilytetä ohjeiden lähettämisen jälkeen.\n\n\
-- Jos haluat lisäohjeet sähköpostilla, anna osoitteesi alla.\n\
-- Napsauta Peruuta, jos et halua ottaa osaa juuri nyt."
-  MESSAGE_CANCELLED="Tietojen lähetys on peruutettu. Käynnistä tämä sovellus uudelleen, jos haluat lähettää tiedot."
-  MESSAGE_SUBMIT_OK="Tietojen lähetys onnistui"
-  MESSAGE_SUBMIT_FAILED="Tietojen lähetys epäonnistui\n"
+def execute_cmd (cmdstr):
+    return os.popen(cmdstr).read()
 
-elif [ "${THIS_LANG}" == "sv" ]; then
-  # Swedish
-  MESSAGE_PERMISSION="<b>På svenska: Submit device information to Digabi Project?</b>\n\n\
-Collected data will be used for creating list of supported devices and for troubleshooting purposes.\n\n\
-This data includes computer model, manufacturer, cpu type, size of the memory, list of devices etc. \
-<a href='https://digabi.fi/feedback'>See full description about data we collect</a> and <a href='${LOGFILE_URL}'>preview collected data</a>.\n\n\
-Connection is encrypted, and no personal information will be sent.\n\n\
-<a href='https://digabi.fi/privacy'>Read Digabi Privacy Policy</a>"
-  MESSAGE_ASK_EMAIL="På svenska: Tell us how you booted to USB!\n\n\
-Booting to USB memory stick may be challenging in some devices. We have
-made it easy for you to report BIOS settings required to boot your device.\n\n\
-By entering your email below you will get further instructions how you can\n\
-share your BIOS settings and help other users to boot their devices.\n\n\
-Your email address will not be stored after we have sent the instructions\n\
-to you.\n\n\
-- Please enter your email if you would like to receive the instructions.\n\
-- Click Cancel if you don't want to participate at the moment."
-  MESSAGE_CANCELLED="På svenska: Data submission cancelled per your request. Re-run this application if you want to submit."
-  MESSAGE_SUBMIT_OK="På svenska: Data submitted successfully"
-  MESSAGE_SUBMIT_FAILED="På svenska: Data submission failed\n"
+def execute_cmd_oneline (cmdstr):
+    line = os.popen(cmdstr).read()
+    p = re.compile('\n$')
+    return p.sub('', line)
+    
+# Set some global defaults
+SUBMIT_URL=execute_cmd_oneline('digabi config get --global feedback_url')
+URL_DIGABI_PRIVACY=execute_cmd_oneline('digabi config get --global feedback_privacy_url')
+LOGFILE=tempfile.mkstemp(".log", "digabi-feedback.")[1]
+CAPTCHAFILE=tempfile.mkstemp(".png", "digabi-feedback.")[1]
 
-else
-  # Fallback: English
-  MESSAGE_PERMISSION="<b>Submit device information to Digabi Project?</b>\n\n\
-Collected data will be used for creating list of supported devices and for troubleshooting purposes.\n\n\
-This data includes computer model, manufacturer, cpu type, size of the memory, list of devices etc. <a href='https://digabi.fi/feedback'>See full description about data we collect</a> and <a href='${LOGFILE_URL}'>preview collected data</a>.\n\n\
-Connection is encrypted, and no personal information will be sent.\n\n\
-<a href='https://digabi.fi/privacy'>Read Digabi Privacy Policy</a>"
-  # Unfortunately the zenity --entry method does not support Pango Markup Language
-  MESSAGE_ASK_EMAIL="Tell us how you booted to USB!\n\n\
-Booting to USB memory stick may be challenging in some devices. We have
-made it easy for you to report BIOS settings required to boot your device.\n\n\
-By entering your email below you will get further instructions how you can\n\
-share your BIOS settings and help other users to boot their devices.\n\n\
-Your email address will not be stored after we have sent the instructions\n\
-to you.\n\n\
-- Please enter your email if you would like to receive the instructions.\n\
-- Click Cancel if you don't want to participate at the moment."
-  MESSAGE_CANCELLED="Data submission cancelled per your request. Re-run this application if you want to submit."
-  MESSAGE_SUBMIT_OK="Data submitted successfully"
-  MESSAGE_SUBMIT_FAILED="Data submission failed\n"
 
-fi
+# Set up message catalog access
+t = gettext.translation('digabihw_submit_feedback', 'locale', fallback=True)
+_ = t.gettext
 
-collect_data() {
-  sudo /usr/bin/digabi collect-feedback ${LOGFILE}
-}
+class Assistant:
+    feedback_data = None
+    comment_text = None
+    captcha_id = None
+    final_post_url = None
+    
+    def __init__(self):
+        global SUBMIT_URL
+        global CAPTCHAFILE
+                
+        assistant = gtk.Assistant()
+        
+        assistant.connect("apply", self.callback_apply)
+        assistant.connect("cancel", self.callback_cancel)
+        assistant.connect("close", self.callback_close)
+        assistant.connect("prepare", self.callback_prepare)
+        
+        # Collect feedback
+        self.collect_feedback()
+        
+        # Get Captcha ID
+        try:
+           usock = urllib2.urlopen(SUBMIT_URL+"?digabihw_captcha_id=0")
+        except:
+           print "Failed to contact server '%s'" % SUBMIT_URL
+           self.exit_fatal_error(_("Could not contact to server. No data was transmitted."))
+           
+        self.captcha_id = usock.read()
+        usock.close()
+        
+        # Get Captcha Image
+        try:
+           usock = urllib2.urlopen(SUBMIT_URL+"?digabihw_captcha_id="+self.captcha_id)
+        except:
+           print "Failed to contact server '%s'" % SUBMIT_URL
+           self.exit_fatal_error(_("Could not contact to server. No data was transmitted."))
+        
+        imgf = open(CAPTCHAFILE, "wb")
+        imgf.write(usock.read())
+        imgf.close()
+        usock.close()
+        
+        vbox = {}
+        
+        #### Wizard page 1
+        
+        vbox[1] = gtk.VBox()
+        vbox[1].set_border_width(5)
+        assistant.append_page(vbox[1])
+        assistant.set_page_title(vbox[1], _("Page 1: About privacy"))
+        assistant.set_page_type(vbox[1], gtk.ASSISTANT_PAGE_CONTENT)
+        label = gtk.Label(_("The technical data we just collected from your device will be used for creating list of supported devices and for troubleshooting purposes.\n\nThis data includes computer model, manufacturer, cpu type, size of the memory, list of devices etc."))
+        label.set_line_wrap(True)
+        
+        button_review = gtk.Button(_("Review Collected Data"))
+        button_review.connect("clicked", self.button_open_collected_data)
+        button_digabi = gtk.Button(_("Privacy Policy"))
+        button_digabi.connect("clicked", self.button_open_privacy_policy)
+        vbox[1].pack_start(label, True, True, 0)
+        vbox[1].pack_start(button_review, False, False, 0)
+        vbox[1].pack_start(button_digabi, False, False, 0)
+        assistant.set_page_complete(vbox[1], True)
+        
+        #### Wizard page 2
+        
+        vbox[2] = gtk.VBox()
+        vbox[2].set_border_width(5)
+        assistant.append_page(vbox[2])
+        assistant.set_page_title(vbox[2], _("Page 2: Help with booting"))
+        assistant.set_page_type(vbox[2], gtk.ASSISTANT_PAGE_CONTENT)
+        label = gtk.Label( \
+            _("Booting to USB memory stick may be challenging in some devices. We have made it easy for you to report BIOS settings required to boot your device. By entering your email below you will get further instructions how you can share your BIOS settings and help other users to boot their devices. Your email address will not be published or stored after we have sent the instructions to you.\n\n") + \
+            _("<b>Please enter your email if you would like to receive the instructions.</b>\n\n") + \
+            _("Do not enter your email if you don't want to participate at the moment."))
+        
+        label.set_line_wrap(True)
+        label.set_use_markup(gtk.TRUE)
+        
+        self.email_entry = gtk.Entry()
+        
+        vbox[2].pack_start(label, True, True, 0)
+        vbox[2].pack_start(self.email_entry, True, True, 0)
+        assistant.set_page_complete(vbox[2], True)
 
-ask_permission() {
-  zenity --question --title="${APPNAME}" --text="${MESSAGE_PERMISSION}"
-  echo "$?"
-}
+        #### Wizard page 3
+        
+        vbox[3] = gtk.VBox()
+        vbox[3].set_border_width(5)
+        assistant.append_page(vbox[3])
+        assistant.set_page_title(vbox[3], _("Page 3: Compatibility"))
+        assistant.set_page_type(vbox[3], gtk.ASSISTANT_PAGE_CONTENT)
 
-ask_email() {
-  zenity --entry --title="${APPNAME}" --text="${MESSAGE_ASK_EMAIL}"
-}
+        label = gtk.Label(_("Please enter your general comments about the possible technical incompatibilities: screen, keyboard, mouse, touchpad, sound etc."))
+        label.set_line_wrap(True)
 
-collect_data
+        self.comment_textview = gtk.TextView()
+        self.comment_textview.set_wrap_mode(gtk.WRAP_WORD)
+        
+        # put the textview inside a scroll area
+        comment_scroll = gtk.ScrolledWindow()
+        comment_scroll.set_policy(gtk.POLICY_NEVER, gtk.POLICY_ALWAYS)
+        comment_scroll.set_size_request(256,256)
+        comment_scroll.add(self.comment_textview)
+        
+        vbox[3].pack_start(label, True, True, 0)
+        vbox[3].pack_start(comment_scroll, True, True, 0)
+        
+        assistant.set_page_complete(vbox[3], True)
 
-if [ "$(ask_permission)" = 1 ]
-then
-  zenity --warning --title="${APPNAME}" --text="${MESSAGE_CANCELLED}"
-  exit 1
-fi
+        #### Wizard page 4
+        
+        vbox[4] = gtk.VBox()
+        vbox[4].set_border_width(5)
+        assistant.append_page(vbox[4])
+        assistant.set_page_title(vbox[4], _("Page 4: Confirm that you are human"))
+        assistant.set_page_type(vbox[4], gtk.ASSISTANT_PAGE_CONTENT)
+        label = gtk.Label(_("We want to make sure that only humans create hardware reports. Please repeat the characters from the image."))
+        label.set_line_wrap(True)
+        
+        captcha_image = gtk.Image()
+        captcha_image.set_from_file(CAPTCHAFILE)
+        
+        self.captcha_code = gtk.Entry()
 
-EMAIL=`ask_email`
+        vbox[4].pack_start(label, True, True, 0)
+        vbox[4].pack_start(captcha_image, True, True, 0)
+        vbox[4].pack_start(self.captcha_code, True, True, 0)
+        assistant.set_page_complete(vbox[4], True)
 
-ATTEMPTS="15"
-TIMEOUT="5"
+        #### Wizard page 5
+        
+        vbox[5] = gtk.VBox()
+        vbox[5].set_border_width(5)
+        assistant.append_page(vbox[5])
+        assistant.set_page_title(vbox[5], "Page 5: Ready to submit")
+        assistant.set_page_type(vbox[5], gtk.ASSISTANT_PAGE_CONFIRM)
+        
+        self.final_label = gtk.Label()
+        self.final_label.set_line_wrap(True)
+        vbox[5].pack_start(self.final_label, True, True, 0)
+        
+        #### Wizard page 6
+        
+        vbox[6] = gtk.VBox()
+        vbox[6].set_border_width(5)
+        assistant.append_page(vbox[6])
+        assistant.set_page_title(vbox[6], "Page 6: Results")
+        assistant.set_page_type(vbox[6], gtk.ASSISTANT_PAGE_CONTENT)
+        
+        self.status_label = gtk.Label()
+        self.status_label.set_line_wrap(True)
+        vbox[6].pack_start(self.status_label, True, True, 0)
+        
+        #### Wizard page 7
+        
+        vbox[7] = gtk.VBox()
+        vbox[7].set_border_width(5)
+        assistant.append_page(vbox[7])
+        assistant.set_page_title(vbox[7], "Finished")
+        assistant.set_page_type(vbox[7], gtk.ASSISTANT_PAGE_SUMMARY)
+        
+        label = gtk.Label(_("Thank you for submitting data!"))
+        label.set_line_wrap(True)
+        button_openpost = gtk.Button(_("Open the report page"))
+        button_openpost.connect("clicked", self.button_openpost)
+        
+        vbox[7].pack_start(label, True, True, 0)
+        vbox[7].pack_start(button_openpost, False, False, 0)
+        assistant.set_page_complete(vbox[7], True)
+        
+        assistant.show_all()
+    
+    def callback_prepare (self, assistant, page):
+        global LOGFILE
+        global SUBMIT_URL
+        
+        page_num = assistant.get_current_page()
+        print "Callback for page: %d" % page_num
+        
+        if (page_num == 0):
+            # First page: Collect feedback
 
-# Source for with_backoff function: <http://stackoverflow.com/questions/8350942/how-to-re-run-the-curl-command-automatically-when-the-error-occurs>
-with_backoff () {
-  local max_attempts=${ATTEMPTS-5}
-  local timeout=${TIMEOUT-1}
-  local attempt=0
-  local exitCode=0
+            self.collect_feedback()
+            assistant.set_page_complete(page, True)
+        elif (page_num == 4):
+            # Get & show captcha picture
 
-  while [[ $attempt < $max_attempts ]]
-  do
-    set +e
-    "$@"
-    exitCode=$?
-    set -e
+            label_str = _("Ready to submit following data:\n\n1) Techical details of your hardware.\n\n")
+			  
+            if self.email_entry.get_text() == "":
+               label_str = label_str + _("2) You <b>don't want</b> to receive instructions on reporting how you booted your device.\n\n")
+            else:
+               label_str = label_str + _("2) You gave your email (%s) for instructions on reporting the boot settings.\n\n") % self.email_entry.get_text()
 
-    if [[ $exitCode == 0 ]]
-    then
-      break
-    fi
+            # Get contents of the comment textbuffer (set it to the class variable)
+            comment_textbuffer = self.comment_textview.get_buffer()
+            self.comment_text = comment_textbuffer.get_text(comment_textbuffer.get_start_iter(),
+                comment_textbuffer.get_end_iter(),
+                False)
+            
+            if self.comment_text == "":
+               label_str = label_str + _("3) You <b>have not</b> given any comments on technical compatibility.\n\n")
+            else:
+               label_str = label_str + _("3) You have given us comments on techical compatibility.\n\n")
+               
+            if self.captcha_code.get_text() == "":
+               label_str = label_str + _("<b>You have not written the captcha code (please return to the previous page).</b>")
+            else:
+               # User has given a captcha code -> allow forward button
+               assistant.set_page_complete(page, True)
 
-    echo "Failure! Retrying in $timeout.." 1>&2
-    sleep $timeout
-    attempt=$(( attempt + 1 ))
-    timeout=$(( timeout * 2 ))
-  done
+            self.final_label.set_use_markup(gtk.TRUE)
+            self.final_label.set_markup(label_str)
+            
+        elif (page_num == 5):
+            # Submit data and show result
 
-  if [[ $exitCode != 0 ]]
-  then
-    echo "You've failed me for the last time! ($@)" 1>&2
-    echo "999:backoff"
-  fi
+           curl_cmd = "curl -s -F\"digabihw_version=2.0\" " + \
+                "-F\"digabihw_email="+self.email_entry.get_text()+"\" " + \
+                "-F\"digabihw_data=@"+LOGFILE+"\" " + \
+                "-F\"digabihw_captcha_id="+self.captcha_id+"\" " + \
+                "-F\"digabihw_captcha_code="+self.captcha_code.get_text()+"\" " + \
+                "-F\"digabihw_comment="+self.comment_text+"\" " + \
+                SUBMIT_URL
 
-  return $exitCode
-}
+           print "CURL command: [%s]" % curl_cmd
 
-if [ -r "${LOGFILE}" ]; then
-  RESULT=`with_backoff curl -s -F"digabihw_version=2.0" -F"digabihw_email=${EMAIL}" -F"digabihw_data=@${LOGFILE}" "${SUBMIT_URL}"`
-  RESULT_CODE=`echo "${RESULT}" | cut -f1 -d":"`
-  if [ "${RESULT_CODE}" == "0" ]; then
-     zenity --info --title="${APPNAME}" --text="${MESSAGE_SUBMIT_OK}"
-  else
-     zenity --error --title="${APPNAME}" --text="${MESSAGE_SUBMIT_FAILED}Error: \"${RESULT}\""
-  fi
-fi
+           status_line = execute_cmd_oneline(curl_cmd)
+        
+           print "Status line: [%s]" % status_line
+        
+           status = status_line.split(":", 1)
+        
+           if (status[0] == "0"):
+               self.status_label.set_text(_("Data was submitted successfully."))
+               self.final_post_url = status[1]
+               assistant.set_page_complete(page, True)
+           elif (status[0] == "3"):
+               self.status_label.set_text(_("Please go back and review the characters you typed from the image."))
+           else:
+               self.status_label.set_text(_("Data submission failed (#%s): %s") % (status[0], status[1]))
 
-#if [ ! -z "${LOGFILE}" ]
-#  then
-#  rm "${LOGFILE}"
-#fi
+    
+    def callback_apply (self, assistant):
+        print "Apply clicked"
+
+    def callback_cancel(self, assistant):
+        # Cancel clicked
+
+        md = gtk.MessageDialog(assistant, 
+            gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, 
+            gtk.BUTTONS_CLOSE, _("Operation cancelled. No data was transmitted."))
+        md.run()
+        md.destroy()
+        
+        self.make_cleanup()
+        
+        gtk.main_quit()
+
+    def callback_close (self, assistant):
+        # Close clicked
+        
+        self.make_cleanup()
+        
+        gtk.main_quit()
+    
+    def collect_feedback(self):
+        global LOGFILE
+        print "Collecting data to logfile: " + LOGFILE
+        if self.feedback_data is None:
+           self.feedback_data = execute_cmd("sudo /usr/bin/digabi collect-feedback %s" % LOGFILE)
+
+    def button_open_collected_data(self, button):
+        global LOGFILE
+        execute_cmd("/etc/alternatives/gnome-text-editor %s" % LOGFILE)
+    
+    def button_open_privacy_policy(self, button):
+        global URL_DIGABI_PRIVACY
+        execute_cmd("/etc/alternatives/gnome-www-browser %s" % URL_DIGABI_PRIVACY)
+
+    def button_openpost(self, button):
+        # print "openpost self is: "+self
+        print "openpost url is: "+self.final_post_url
+        
+        if self.final_post_url is not None:
+            execute_cmd("/etc/alternatives/gnome-www-browser %s" % self.final_post_url)
+    
+    def exit_fatal_error (self, message):
+        md = gtk.MessageDialog(None, 
+            gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_ERROR, 
+            gtk.BUTTONS_CLOSE, message)
+        md.run()
+        md.destroy()
+        
+        self.make_cleanup()
+        
+        sys.exit(1)
+    
+        
+    def make_cleanup (self):
+        global LOGFILE
+        global CAPTCHAFILE
+        
+        os.unlink(LOGFILE)
+        os.unlink(CAPTCHAFILE)
+    
+    
+Assistant()
+gtk.main()
+
+	
