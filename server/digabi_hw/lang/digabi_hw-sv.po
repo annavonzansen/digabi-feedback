@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-06-11 13:11+0200\n"
+"PO-Revision-Date: 2014-06-12 10:16+0200\n"
 "Last-Translator: Anna von Zansen <anna.vonzansen@ylioppilastutkinto.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: Poedit 1.6.5\n"
@@ -17,163 +17,166 @@ msgstr ""
 
 #: digabi_hw.php:118
 msgid "Unknown status code"
-msgstr ""
+msgstr "Okänd status"
 
 #: digabi_hw.php:126
 msgid "Reports of this machine"
-msgstr ""
+msgstr "Rapporter från enheten"
 
 #: digabi_hw.php:140
 msgid "Basic Info"
-msgstr ""
+msgstr "Grundläggande information"
 
 #: digabi_hw.php:156 digabi_hw.php:201
 msgid "Meets the requirements"
-msgstr ""
+msgstr "Uppfyller kraven"
 
 #: digabi_hw.php:160 digabi_hw.php:205
 msgid "Does not meet the requirements"
-msgstr ""
+msgstr "Uppfyller inte kraven"
 
 #: digabi_hw.php:170
 msgid "Search"
-msgstr ""
+msgstr "Sökning"
 
 #: digabi_hw.php:185
 msgid "Detailed Info"
-msgstr ""
+msgstr "Detaljerad information"
 
 #: digabi_hw.php:220
 msgid "Requirements"
-msgstr ""
+msgstr "Kraven"
 
 #: digabi_hw.php:224
 msgid "Passed requirements"
-msgstr ""
+msgstr "Uppfyllda krav"
 
 #: digabi_hw.php:233
 msgid "Failed requirements"
-msgstr ""
+msgstr "Icke uppfyllda krav"
 
 #: digabi_hw.php:245
 msgid "Search devices"
-msgstr ""
+msgstr "Sök enheter"
 
 #. Plugin Name of the plugin/theme
 #: digabi_hw.php:297
 msgid "Digabi HW"
-msgstr ""
+msgstr "Digabi HW"
 
 #: digabi_hw.php:305
 msgid "Digabi HW Settings menu"
-msgstr ""
+msgstr "Digabi HW Inställningar"
 
 #: digabi_hw_functions.php:75
 msgid "HW Reports"
-msgstr ""
+msgstr "Enhetsrapporter"
 
 #: digabi_hw_functions.php:75
 msgid "HW Report"
-msgstr ""
+msgstr "Enhetsrapport"
 
 #: digabi_hw_functions.php:103
 msgid "Device Category"
-msgstr ""
+msgstr "Enhets typ"
 
 #: settings.php:52
 msgid "Manufacturer"
-msgstr ""
+msgstr "Tillverkare"
 
 #: settings.php:53
 msgid "Product Name"
-msgstr ""
+msgstr "Produktnamn"
 
 #: settings.php:54
 msgid "System Memory (Mb)"
-msgstr ""
+msgstr "Primärminne (Mb)"
 
 #: settings.php:55
 msgid "CPU Model"
-msgstr ""
+msgstr "Processors minne"
 
 #: settings.php:56
 msgid "Network Hardware"
-msgstr ""
+msgstr "Nätkort"
 
 #: settings.php:57
 msgid "Multimedia Hardware"
-msgstr ""
+msgstr "Ljudkort"
 
 #: settings.php:58
 msgid "Screen Resolution"
-msgstr ""
+msgstr "Skärmupplösning"
 
 #: settings.php:68
 msgid "Product SKU"
-msgstr ""
+msgstr "Produktnummer"
 
 #: settings.php:69
 msgid "Firmware Description"
-msgstr ""
+msgstr "Firmware"
 
 #: settings.php:70
 msgid "Firmware Vendor"
-msgstr ""
+msgstr "Tillverkare av firmware"
 
 #: settings.php:71
 msgid "Firmware Version"
-msgstr ""
+msgstr "Version av firmware"
 
 #: settings.php:72
 msgid "Firmware Capabilities"
-msgstr ""
+msgstr "Egenskaper av firmware"
 
 #: settings.php:73
 msgid "Multimedia Driver"
-msgstr ""
+msgstr "Drivrutin för ljudkort"
 
 #: settings.php:74
 msgid "Possible Screen Resolutions"
-msgstr ""
+msgstr "Möjliga skärmupplösningar"
 
 #: settings.php:75
 msgid "Digabi Version"
-msgstr ""
+msgstr "Digabi OS version"
 
 #: settings.php:86
 msgid "Report Counter"
-msgstr ""
+msgstr "Rapporträknare"
 
 #: settings.php:87
 msgid "Report Status"
-msgstr ""
+msgstr "Rapport status"
 
 #: settings.php:109
 msgid "This device is <b>working</b>."
-msgstr ""
+msgstr "Den här enheten <b> fungerar </b>."
 
 #: settings.php:110
 msgid "This device is <b>not working</b>."
-msgstr ""
+msgstr "Den här enheten <b> fungerar inte </b>."
 
 #: settings.php:111
 msgid ""
 "Note: This report is user-supplied and has not been reviewed by the MEB "
 "staff."
 msgstr ""
+"OBS: Den här rapporten är från användaren och SEN:s personal har inte "
+"granskat den."
 
 #: settings.php:112
 msgid "This report has been reviewed by the MEB staff."
-msgstr ""
+msgstr "SEN:s personal har granskat den här rapporten."
 
 #. Plugin URI of the plugin/theme
 msgid "https://digabi.fi"
-msgstr ""
+msgstr "https://digabi.fi"
 
 #. Description of the plugin/theme
 msgid "Adds support for Digabi Hardware post type and metadata fields"
 msgstr ""
+"Tillsätter stöd för Digabi enhetsrapportering och nödvändiga tilläggsfält."
 
 #. Author of the plugin/theme
 msgid "Matti Lattu"
-msgstr ""
+msgstr "Matti Lattu"

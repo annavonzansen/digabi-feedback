@@ -5,26 +5,27 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: submit-feedback\n"
+"Project-Id-Version: Digabi HW asiakas\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-11 19:59+0300\n"
 "PO-Revision-Date: 2014-06-12 12:00+0200\n"
 "Last-Translator: Anna von Zansen <anna.vonzansen@ylioppilastutkinto.fi>\n"
-"Language-Team: \n"
+"Language-Team: YTL <digabi@ylioppilastutkinto.fi>\n"
+"Language: sv_FI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
-"Language: fi_FI\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:76
 #: /usr/lib/digabi/scripts/submit-feedback:86
 msgid "Could not contact to server. No data was transmitted."
-msgstr "Palvelimeen ei saatu yhteyttä. Tietoja ei lähetetty."
+msgstr "Kunde inte ansluta till servern. Data skickades inte."
 
 #: /usr/lib/digabi/scripts/submit-feedback:100
 msgid "Page 1: About privacy"
-msgstr "Sivu 1: Yksityisyyden suoja"
+msgstr "Sida 1: Integritetsskydd"
 
 #: /usr/lib/digabi/scripts/submit-feedback:102
 msgid ""
@@ -34,24 +35,24 @@ msgid ""
 "This data includes computer model, manufacturer, cpu type, size of the "
 "memory, list of devices etc."
 msgstr ""
-"Laitteestasi äsken keräämiämme teknisiä tietoja käytetään toimivien "
-"laitteiden luettelon tekemiseen. Tietoja käytetään myös teknisten ongelmien "
-"ratkaisuun.\n"
+"Tekniska data som vi samlade nyligen från din enhet används för att kunna "
+"skapa en lista över enheter som fungerar. Information används också för att "
+"kunna lösa tekniska problem.\n"
 "\n"
-"Tiedot käsittävät konemallin, valmistajan, prosessorin tyypin, muistin "
-"määrän, lisälaitteiden tiedot jne."
+"Dessa tekniska data innehåller information om enhetens modell, tillverkare, "
+"processors typ, minnesstorlek, information om tillbehör osv."
 
 #: /usr/lib/digabi/scripts/submit-feedback:105
 msgid "Review Collected Data"
-msgstr "Selaa kerättyä aineistoa"
+msgstr "Bläddra data som samlats"
 
 #: /usr/lib/digabi/scripts/submit-feedback:107
 msgid "Privacy Policy"
-msgstr "Yksityisyyden suoja"
+msgstr "Integritetsskydd"
 
 #: /usr/lib/digabi/scripts/submit-feedback:119
 msgid "Page 2: Help with booting"
-msgstr "Sivu 2: Auta käynnistyksessä"
+msgstr "Sida 2: Hjälp med bootandet"
 
 #: /usr/lib/digabi/scripts/submit-feedback:122
 msgid ""
@@ -63,13 +64,12 @@ msgid ""
 "instructions to you.\n"
 "\n"
 msgstr ""
-"Koneen käynnistäminen USB-muistitikulta voi olla joissain laitteissa "
-"vaikeaa. Me olemme tehneet sinulle helpoksi auttaa muita käynnistämään "
-"sinulla olevan laitemallin. Kirjoittamalla allaolevaan kenttään "
-"sähköpostiosoitteesi saat tarkemmat ohjeet, joiden avulla voit jakaa BIOS-"
-"asetuksesi ja auttaa muita käynnistämään oman laitteensa. "
-"Sähköpostiosoitettasi ei julkaista tai talleteta viestin lähettämisen "
-"jälkeen.\n"
+"Det kan vara svårt att starta några datorer från ett USB-minne (så kallad "
+"bootning). Vi har gjort det enkelt för dig att hjälpa andra boota den "
+"enhetsmodellen som du har.  Genom att skriva din e-postadress i nedanstående "
+"fält får du instruktioner om hur du kan dela dina BIOS-inställningar och på "
+"det sättet hjälpa andra vid bootning. Din e-postadress publiceras eller "
+"sparas inte. \n"
 "\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:123
@@ -78,58 +78,56 @@ msgid ""
 "b>\n"
 "\n"
 msgstr ""
-"<b>Ole hyvä ja anna sähköpostiosoitteesi, jos haluat vastaanottaa ohjeet.</"
-"b>\n"
+"<b> Vänligen ge din e-postadress om du vill få instruktionerna. </b> \n"
 "\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:124
 msgid "Do not enter your email if you don't want to participate at the moment."
-msgstr ""
-"Älä kirjoita sähköpostiosoitettasi, jos et tällä kertaa halua ottaa osaa."
+msgstr "Ge inte din e-postadress om du inte vill delta."
 
 #: /usr/lib/digabi/scripts/submit-feedback:140
 msgid "Page 3: Compatibility"
-msgstr "Sivu 3: Yhteensopivuus"
+msgstr "Dida 3: Kompatibilitet"
 
 #: /usr/lib/digabi/scripts/submit-feedback:143
 msgid ""
 "Please enter your general comments about the possible technical "
 "incompatibilities: screen, keyboard, mouse, touchpad, sound etc."
 msgstr ""
-"Ole hyvä ja kirjoita yleistason kommentit mahdollisista teknisistä "
-"epäyhteensopivuuksista: näyttö, näppäimistö, hiiri, kosketuslevy, ääni jne."
+"Vänligen skriv dina allmänna kommentarer gällande möjliga tekniska "
+"inkombatibilitet: skärm, tangentbord, mus, touchpad, ljud osv."
 
 #: /usr/lib/digabi/scripts/submit-feedback:165
 msgid "Page 4: Confirm that you are human"
-msgstr "Sivu 4: Vahvista että olet ihminen"
+msgstr "Sida 4: Bekräfta att du är en människa"
 
 #: /usr/lib/digabi/scripts/submit-feedback:167
 msgid ""
 "We want to make sure that only humans create hardware reports. Please repeat "
 "the characters from the image."
 msgstr ""
-"Haluamme varmistua siitä, että vain ihmiset lähettävät laiteraportteja. Ole "
-"hyvä ja syötä kuvassa näkemäsi merkit."
+"Vi vill kontrollera att det är endast människor som skickar enhetsrapporter. "
+"Vänligen skriv tecken som du ser på bilden."
 
 #: /usr/lib/digabi/scripts/submit-feedback:185
 msgid "Page 5: Ready to submit"
-msgstr "Sivu 5: Valmiina lähetykseen"
+msgstr "Sida 5: Färdig att skicka information"
 
 #: /usr/lib/digabi/scripts/submit-feedback:197
 msgid "Page 6: Results"
-msgstr "Sivu 6: Tulos"
+msgstr "Sida 6: Resultat"
 
 #: /usr/lib/digabi/scripts/submit-feedback:209
 msgid "Finished"
-msgstr "Valmis"
+msgstr "Färdig"
 
 #: /usr/lib/digabi/scripts/submit-feedback:212
 msgid "Thank you for submitting data!"
-msgstr "Suurkiitos tietojen lähettämisestä!"
+msgstr "Tusen tack för att du skickade data!"
 
 #: /usr/lib/digabi/scripts/submit-feedback:214
 msgid "Open the report page"
-msgstr "Avaa raporttisivu"
+msgstr "Öppna rapportsidan"
 
 #: /usr/lib/digabi/scripts/submit-feedback:238
 msgid ""
@@ -138,9 +136,9 @@ msgid ""
 "1) Techical details of your hardware.\n"
 "\n"
 msgstr ""
-"Valmiina lähettämään seuraavat tiedot:\n"
+"Färdig att skicka följande informationer:\n"
 "\n"
-"1) Laitteistosi tekniset tiedot.\n"
+"1) Tekniska data om din enhet\n"
 "\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:241
@@ -149,8 +147,8 @@ msgid ""
 "your device.\n"
 "\n"
 msgstr ""
-"2) Sinä <b>et halua</b> vastaanottaa ohjeita koneesi oikeista "
-"käynnistysasetuksista.\n"
+"2) Du <b> vill inte </b> få instruktioner hur du rapporterar hur du startade "
+"din dator från ett USB-minne.\n"
 "\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:243
@@ -160,8 +158,8 @@ msgid ""
 "settings.\n"
 "\n"
 msgstr ""
-"2) Annoit sähköpostiosoitteesi (%s) saadaksesi ohjeet koneesi "
-"käynnistysasetusten raportointiin.\n"
+"2) Du gav din e-postadress (%s) för att kunna rapportera "
+"bootningsinställningar som du har.\n"
 "\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:252
@@ -169,7 +167,7 @@ msgid ""
 "3) You <b>have not</b> given any comments on technical compatibility.\n"
 "\n"
 msgstr ""
-"3) Sinä <b>et syöttänyt</b> kommentteja teknisestä yhteensopivuudesta.\n"
+"3) Du <b> har inte </b> skrivit kommentarer gällande tekniska kompatilitet.\n"
 "\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:254
@@ -177,7 +175,7 @@ msgid ""
 "3) You have given us comments on techical compatibility.\n"
 "\n"
 msgstr ""
-"3) Kommentoit teknistä yhteensopivuutta.\n"
+"3) Du har skrivit kommentarer gällande tekniska kompatibilitet. \n"
 "\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:257
@@ -185,22 +183,22 @@ msgid ""
 "<b>You have not written the captcha code (please return to the previous "
 "page).</b>"
 msgstr ""
-"<b>Et ole kirjoittanut captcha-tunnistetta (ole hyvä ja palaa edelliselle "
-"sivulle).</b>"
+"<b> Du har inte skrivit captcha-tecken (vänligen gå tillbaka till föregående "
+"sida).</b>"
 
 #: /usr/lib/digabi/scripts/submit-feedback:285
 msgid "Data was submitted successfully."
-msgstr "Tiedot lähetettiin onnistuneesti."
+msgstr "Lyckades skicka data."
 
 #: /usr/lib/digabi/scripts/submit-feedback:289
 msgid "Please go back and review the characters you typed from the image."
-msgstr "Palaa tarkistamaan kuvasta syöttämäsi merkit."
+msgstr "Vänligen gå tillbaka och kontrollera tecken som du ser bilden."
 
 #: /usr/lib/digabi/scripts/submit-feedback:291
 #, python-format
 msgid "Data submission failed (#%s): %s"
-msgstr "Tietojen lähetys epäonnistui (#%s): %s"
+msgstr "Misslyckades skicka data (#%s): %s"
 
 #: /usr/lib/digabi/scripts/submit-feedback:302
 msgid "Operation cancelled. No data was transmitted."
-msgstr "Ohjelman toiminta keskeytettiin. Tietoja ei lähetetty."
+msgstr "Programmet avbröt. Data skickades inte."

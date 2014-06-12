@@ -3,28 +3,29 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Digabi HW asiakas\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-11 19:59+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2014-06-12 11:27+0200\n"
+"Last-Translator: Anna von Zansen <anna.vonzansen@ylioppilastutkinto.fi>\n"
+"Language-Team: YTL <digabi@ylioppilastutkinto.fi>\n"
+"Language: sv_FI\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.5\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:76
 #: /usr/lib/digabi/scripts/submit-feedback:86
 msgid "Could not contact to server. No data was transmitted."
-msgstr ""
+msgstr "Kunde inte ansluta till servern. Data skickades inte."
 
 #: /usr/lib/digabi/scripts/submit-feedback:100
 msgid "Page 1: About privacy"
-msgstr ""
+msgstr "Sida 1: Integritetsskydd"
 
 #: /usr/lib/digabi/scripts/submit-feedback:102
 msgid ""
@@ -34,18 +35,24 @@ msgid ""
 "This data includes computer model, manufacturer, cpu type, size of the "
 "memory, list of devices etc."
 msgstr ""
+"Tekniska data som vi samlade nyligen från din enhet används för att kunna "
+"skapa en lista över enheter som fungerar. Information används också för att "
+"kunna lösa tekniska problem.\n"
+"\n"
+"Dessa tekniska data innehåller information om enhetens modell, tillverkare, "
+"processors typ, minnesstorlek, information om tillbehör osv."
 
 #: /usr/lib/digabi/scripts/submit-feedback:105
 msgid "Review Collected Data"
-msgstr ""
+msgstr "Bläddra data som samlats"
 
 #: /usr/lib/digabi/scripts/submit-feedback:107
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Integritetsskydd"
 
 #: /usr/lib/digabi/scripts/submit-feedback:119
 msgid "Page 2: Help with booting"
-msgstr ""
+msgstr "Sida 2: Hjälp med bootandet"
 
 #: /usr/lib/digabi/scripts/submit-feedback:122
 msgid ""
@@ -57,41 +64,52 @@ msgid ""
 "instructions to you.\n"
 "\n"
 msgstr ""
+"Det kan vara svårt att starta några datorer från ett USB-minne (så kallad "
+"bootning). Vi har gjort det enkelt för dig att hjälpa andra boota den "
+"enhetsmodellen som du har.  Genom att skriva din e-postadress i nedanstående "
+"fält får du instruktioner om hur du kan dela dina BIOS-inställningar och på "
+"det sättet hjälpa andra vid bootning. Din e-postadress publiceras eller "
+"sparas inte. \n"
+"\n"
 
 #: /usr/lib/digabi/scripts/submit-feedback:123
 msgid ""
 "<b>Please enter your email if you would like to receive the instructions.</"
 "b>\n"
 "\n"
-msgstr ""
+msgstr "Vänligen ge din e-postadress om du vill få instruktionerna."
 
 #: /usr/lib/digabi/scripts/submit-feedback:124
 msgid "Do not enter your email if you don't want to participate at the moment."
-msgstr ""
+msgstr "Ge inte din e-postadress om du inte vill delta."
 
 #: /usr/lib/digabi/scripts/submit-feedback:140
 msgid "Page 3: Compatibility"
-msgstr ""
+msgstr "Dida 3: Kompatibilitet"
 
 #: /usr/lib/digabi/scripts/submit-feedback:143
 msgid ""
 "Please enter your general comments about the possible technical "
 "incompatibilities: screen, keyboard, mouse, touchpad, sound etc."
 msgstr ""
+"Vänligen skriv dina allmänna kommentarer gällande möjliga tekniska "
+"inkombatibilitet: skärm, tangentbord, mus, touchpad, ljud osv."
 
 #: /usr/lib/digabi/scripts/submit-feedback:165
 msgid "Page 4: Confirm that you are human"
-msgstr ""
+msgstr "Sida 4: Bekräfta att du är en människa"
 
 #: /usr/lib/digabi/scripts/submit-feedback:167
 msgid ""
 "We want to make sure that only humans create hardware reports. Please repeat "
 "the characters from the image."
 msgstr ""
+"Vi vill kontrollera att det är endast människor som skickar enhetsrapporter. "
+"Vänligen skriv tecken som du ser på bilden."
 
 #: /usr/lib/digabi/scripts/submit-feedback:185
 msgid "Page 5: Ready to submit"
-msgstr ""
+msgstr "Sida 6: Färdig att "
 
 #: /usr/lib/digabi/scripts/submit-feedback:197
 msgid "Page 6: Results"
