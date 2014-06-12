@@ -167,9 +167,21 @@ function digabihw_set_global_settings () {
     // inside array definition.
     
     $email_message = <<<DIGABIHW_EMAIL_END
-Menepä raportoimaan BIOS-asetukset osoitteeseen #URL#.
+Hei! 
+Huippua, että onnistuit käynnistämään DigabiOS:n muistitikulta! 
+Laitteen käynnistäminen ulkoiselta medialta (tikulta) ei vielä ole kaikille arkipäivää, joten nyt voit olla avuksi! Voisitko käydä kertomassa, miten onnistuit eli raportoi koneesi BIOS-asetukset osoitteessa #URL#.
+Kiitos jo etukäteen!
 
-Kiitos!
+Hej!
+Fint att du lyckades starta din dator från en DigabiOS-minnepinne!
+Inte alla bootar sina datorer varje dag från ett externt medium (USB-minne) så nu är det dags att tipsa hur man gör det! Gå till adressen #URL# för att berätta hur du startade din dator - rapportera alltså om dina BIOS-inställningar!
+Tack på förhand!
+
+Hi!
+We´re happy to hear that you booted your computer from an DigabiOS USB flash drive!
+Not everyone of us knows how to boot from an external hard drive so now you can help other people! Please go to address #URL# and report your BIOS settings.
+Thanks a lot!
+
 DIGABIHW_EMAIL_END;
     
     /**
